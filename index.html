@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RDSGN — Web & Digital</title>
-  <meta name="description" content="RDSGN — Web design, development & digital marketing by Jitesh" />
+  <meta name="description" content="RDSGN — Modern Web Design, Development & Digital Solutions" />
 
   <link rel="icon" href="assets/favicon.png" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+  <!-- Header -->
   <header class="site-header">
     <div class="container">
       <a class="logo" href="/">RDSGN</a>
@@ -23,73 +25,103 @@
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>We build clean websites that convert.</h1>
-        <p>WordPress, HTML/CSS, JavaScript, SEO & digital marketing — sab ek jagah.</p>
-        <a href="#contact" class="primary">Get a free quote</a>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>We build clean and modern websites.</h1>
+      <p>Simple, fast, responsive — crafted for better user experience.</p>
+      <a href="#contact" class="primary">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="container cards">
+    <h2>Services</h2>
+    <div class="card-grid">
+
+      <article class="card">
+        <h3>Web Design</h3>
+        <p>Modern responsive websites using HTML, CSS, Bootstrap, JavaScript.</p>
+      </article>
+
+      <article class="card">
+        <h3>WordPress</h3>
+        <p>Custom themes, setup, redesign, and speed optimization.</p>
+      </article>
+
+      <article class="card">
+        <h3>SEO & Marketing</h3>
+        <p>On-page SEO, Google Search Console, Google Ads, social ads.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="container">
+    <h2>Recent Work</h2>
+    <div class="work-grid">
+
+      <div class="work-item">
+        <img src="assets/example1.png" alt="Project preview" />
+        <h4>Project Title</h4>
       </div>
-    </section>
 
-    <section id="services" class="container cards">
-      <h2>Services</h2>
-      <div class="card-grid">
-        <article class="card">
-          <h3>Web Design</h3>
-          <p>Modern responsive designs using HTML, CSS, Bootstrap.</p>
-        </article>
-        <article class="card">
-          <h3>WordPress</h3>
-          <p>Theme setup, customization, speed optimization.</p>
-        </article>
-        <article class="card">
-          <h3>Digital Marketing</h3>
-          <p>On-page SEO, Google Ads, Facebook Ads, Analytics setup.</p>
-        </article>
+      <div class="work-item">
+        <img src="assets/example2.png" alt="Project preview" />
+        <h4>Landing Page</h4>
       </div>
-    </section>
 
-    <section id="work" class="container">
-      <h2>Recent Work</h2>
-      <div class="work-grid">
-        <div class="work-item">
-          <img src="assets/example1.png" alt="Project preview" />
-          <h4>Project Name</h4>
-        </div>
-        <!-- Add more items -->
+      <div class="work-item">
+        <img src="assets/example3.png" alt="Project preview" />
+        <h4>Business Website</h4>
       </div>
-    </section>
 
-    <section id="about" class="container">
-      <h2>About</h2>
-      <p>Hi, main Jitesh — Office manager + digital marketing executive. Maine WordPress, SEO aur front-end seekha hai. Aapka project chhota ho ya bada, main help kar sakta hoon.</p>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="container form-wrap">
-      <h2>Contact</h2>
-      <form id="contactForm" method="POST" action="https://formspree.io/f/your-id">
-        <label>
-          Naam
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Message
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-        <button type="submit" class="primary">Send</button>
-        <p class="form-note">Tip: replace the <code>action</code> with your Formspree endpoint or use mailto.</p>
-      </form>
-    </section>
-  </main>
+  <!-- About -->
+  <section id="about" class="container">
+    <h2>About</h2>
+    <p>
+      We design and build websites that are simple, fast, and effective.
+      Our goal is to ensure your online presence looks professional and works smoothly.
+    </p>
+  </section>
 
+  <!-- Contact -->
+  <section id="contact" class="container form-wrap">
+    <h2>Contact</h2>
+
+    <!-- Simple Email Form -->
+    <form id="contactForm" method="POST" action="https://formspree.io/f/your-id">
+      <label>
+        Your Name
+        <input type="text" name="name" required />
+      </label>
+
+      <label>
+        Email Address
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="primary">Send Message</button>
+
+      <p class="form-note">
+        Note: Replace the <code>action</code> URL with your Formspree ID.
+      </p>
+    </form>
+  </section>
+
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p>© <span id="year"></span> RDSGN — Built by Jitesh</p>
+      <p>© <span id="year"></span> RDSGN — All rights reserved.</p>
     </div>
   </footer>
 
