@@ -1,132 +1,321 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RDSGN — Web & Digital</title>
-  <meta name="description" content="RDSGN — Modern Web Design, Development & Digital Solutions" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rdsgn • Redesign Digital – SEO & Web Dev Portfolio</title>
 
-  <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="description" content="rdsgn (Redesign Digital) – Jitesh's personal playground, portfolio, SEO blog and website making services." />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
-  <!-- Header -->
+  <!-- ===================== HEADER / NAVBAR ===================== -->
   <header class="site-header">
-    <div class="container">
-      <a class="logo" href="/">RDSGN</a>
-      <nav class="nav">
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
+    <div class="container nav-container">
+      <div class="logo">
+        <span class="logo-main">rdsgn</span>
+        <span class="logo-sub">Redesign Digital</span>
+      </div>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#contact" class="btn">Contact</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <button class="mobile-menu" aria-label="Open menu">☰</button>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        ☰
+      </button>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
+  <!-- ===================== HERO / HOME ===================== -->
+  <main id="home" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">Personal Playground • Portfolio • Startup</p>
+        <h1>Hi, I'm <span class="accent">Jitesh</span> – SEO Analyst & Web Developer.</h1>
+        <p class="hero-subtitle">
+          This website is my <strong>learning playground</strong> and also the
+          base of my <strong>startup journey</strong>. Here I create and test SEO ideas,
+          build websites and small games, and work on real client projects.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn primary-btn">View Portfolio</a>
+          <a href="#contact" class="btn ghost-btn">Contact on WhatsApp</a>
+        </div>
+
+        <p class="hero-note">
+          ⚠️ Note: This site is used for learning and experiments. I update it
+          regularly with new designs, SEO tests, and projects.
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <h2>What I Do</h2>
+        <ul>
+          <li>✔ SEO strategy & on-page optimization</li>
+          <li>✔ Fast, responsive websites (HTML, CSS, JS, Bootstrap)</li>
+          <li>✔ WordPress & Wix website setup</li>
+          <li>✔ Small games & experimental projects</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== ABOUT SECTION ===================== -->
+  <section id="about" class="section">
+    <div class="container two-col">
+      <div>
+        <h2>About Me</h2>
+        <p>
+          My name is <strong>Jitesh</strong>. I am an
+          <strong>SEO Manager / SEO Analyst</strong> and a
+          <strong>Web Developer</strong> who enjoys building and experimenting
+          with digital projects.
+        </p>
+        <p>
+          I have around <strong>3 years of experience</strong> working with SEO,
+          websites and different digital tools. This website is my personal
+          space to showcase my projects, learnings and client work.
+        </p>
+        <p>
+          I work with a mix of tools and technologies:
+        </p>
+        <ul class="skills-list">
+          <li>HTML, CSS, Bootstrap, JavaScript</li>
+          <li>WordPress, Wix</li>
+          <li>SEO (On-page, Off-page), Google Analytics, Search Console</li>
+          <li>Facebook Pixel, basic Ads understanding</li>
+          <li>Excel, Google Sheets, Tally</li>
+          <li>C language, C++, Python (basic), and more tools</li>
+        </ul>
+      </div>
+
+      <div class="card info-card">
+        <h3>Quick Profile</h3>
+        <ul class="info-list">
+          <li><span>Role:</span> SEO Analyst & Web Developer</li>
+          <li><span>Experience:</span> ~3 years</li>
+          <li><span>Focus:</span> SEO, Websites, Experiments</li>
+          <li><span>Location:</span> India (Remote friendly)</li>
+        </ul>
+        <a href="#contact" class="btn secondary-btn full-width">Work with me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES / PRODUCT PAGE ===================== -->
+  <section id="services" class="section section-muted">
     <div class="container">
-      <h1>We build clean and modern websites.</h1>
-      <p>Simple, fast, responsive — crafted for better user experience.</p>
-      <a href="#contact" class="primary">Get Started</a>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="container cards">
-    <h2>Services</h2>
-    <div class="card-grid">
-
-      <article class="card">
-        <h3>Web Design</h3>
-        <p>Modern responsive websites using HTML, CSS, Bootstrap, JavaScript.</p>
-      </article>
-
-      <article class="card">
-        <h3>WordPress</h3>
-        <p>Custom themes, setup, redesign, and speed optimization.</p>
-      </article>
-
-      <article class="card">
-        <h3>SEO & Marketing</h3>
-        <p>On-page SEO, Google Search Console, Google Ads, social ads.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- Work -->
-  <section id="work" class="container">
-    <h2>Recent Work</h2>
-    <div class="work-grid">
-
-      <div class="work-item">
-        <img src="assets/example1.png" alt="Project preview" />
-        <h4>Project Title</h4>
-      </div>
-
-      <div class="work-item">
-        <img src="assets/example2.png" alt="Project preview" />
-        <h4>Landing Page</h4>
-      </div>
-
-      <div class="work-item">
-        <img src="assets/example3.png" alt="Project preview" />
-        <h4>Business Website</h4>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="container">
-    <h2>About</h2>
-    <p>
-      We design and build websites that are simple, fast, and effective.
-      Our goal is to ensure your online presence looks professional and works smoothly.
-    </p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="container form-wrap">
-    <h2>Contact</h2>
-
-    <!-- Simple Email Form -->
-    <form id="contactForm" method="POST" action="https://formspree.io/f/your-id">
-      <label>
-        Your Name
-        <input type="text" name="name" required />
-      </label>
-
-      <label>
-        Email Address
-        <input type="email" name="email" required />
-      </label>
-
-      <label>
-        Message
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-
-      <button type="submit" class="primary">Send Message</button>
-
-      <p class="form-note">
-        Note: Replace the <code>action</code> URL with your Formspree ID.
+      <h2 class="section-title">Services</h2>
+      <p class="section-subtitle">
+        Right now I offer a few simple and clear services. As I learn and
+        experiment more, I will keep adding new packages here.
       </p>
-    </form>
+
+      <div class="cards-grid">
+        <article class="card service-card">
+          <h3>SEO Setup & Optimization</h3>
+          <p>
+            Basic to intermediate SEO setup: on-page optimization, simple
+            technical checks, keyword placement, meta tags, internal linking,
+            and content suggestions.
+          </p>
+          <ul class="bullet-list">
+            <li>On-page SEO (titles, descriptions, headings)</li>
+            <li>Basic technical checklist</li>
+            <li>SEO-friendly structure suggestions</li>
+          </ul>
+          <p class="price-tag">Custom pricing – based on your project</p>
+          <a href="#contact" class="btn small-btn primary-btn">Discuss on WhatsApp</a>
+        </article>
+
+        <article class="card service-card">
+          <h3>Website Design & Development</h3>
+          <p>
+            Fast, responsive static websites using HTML, CSS, JS and Bootstrap.
+            Suitable for portfolios, small business sites, blogs and landing pages.
+          </p>
+          <ul class="bullet-list">
+            <li>Clean, modern design</li>
+            <li>Mobile friendly layout</li>
+            <li>Basic SEO-ready structure</li>
+          </ul>
+          <p class="price-tag">Custom pricing – depends on pages & features</p>
+          <a href="#contact" class="btn small-btn primary-btn">Start a project</a>
+        </article>
+
+        <article class="card service-card">
+          <h3>Experiment Projects / Playground</h3>
+          <p>
+            This is my experimental category. Here I build small games, UI
+            experiments and SEO test projects. It is mainly focused on learning
+            and trying new ideas.
+          </p>
+          <ul class="bullet-list">
+            <li>Mini browser games</li>
+            <li>UI / UX experiments</li>
+            <li>SEO test pages & A/B ideas</li>
+          </ul>
+          <p class="price-tag">Learning mode – mostly experiments</p>
+        </article>
+      </div>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="site-footer">
+  <!-- ===================== PORTFOLIO ===================== -->
+  <section id="portfolio" class="section">
     <div class="container">
-      <p>© <span id="year"></span> RDSGN — All rights reserved.</p>
+      <h2 class="section-title">Portfolio – Sites & Games</h2>
+      <p class="section-subtitle">
+        Here I will add my websites, small games and experimental projects.
+        For now there are demo items – later I will replace them with real links.
+      </p>
+
+      <div class="cards-grid">
+        <article class="card portfolio-card">
+          <h3>Demo Portfolio Website</h3>
+          <p>
+            A simple personal portfolio design with a clean layout, responsive
+            sections and SEO-friendly structure. This kind of design can be
+            easily customized for different uses.
+          </p>
+          <a href="#" class="text-link disabled">Live link coming soon</a>
+        </article>
+
+        <article class="card portfolio-card">
+          <h3>Mini Browser Game</h3>
+          <p>
+            A basic JavaScript game (like a number guessing game or a small
+            click challenge). This section is for experiments – I will add real
+            games here as I build them.
+          </p>
+          <a href="#" class="text-link disabled">Game link coming soon</a>
+        </article>
+
+        <article class="card portfolio-card">
+          <h3>SEO Test Landing Page</h3>
+          <p>
+            A landing page where I try different SEO experiments: headings,
+            internal links, content layout, page speed tweaks and more.
+          </p>
+          <a href="#" class="text-link disabled">Test page coming soon</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BLOG ===================== -->
+  <section id="blog" class="section section-muted">
+    <div class="container">
+      <h2 class="section-title">Blog – SEO & Website Notes</h2>
+      <p class="section-subtitle">
+        This blog will be for <strong>SEO details</strong>, <strong>website
+        building notes</strong> and my personal learnings. Here are a few
+        planned topics:
+      </p>
+
+      <div class="cards-grid">
+        <article class="card blog-card">
+          <p class="badge">Coming soon</p>
+          <h3>SEO basics – simple notes</h3>
+          <p>
+            A simple series where I explain SEO in clear, everyday English
+            without heavy technical jargon.
+          </p>
+        </article>
+
+        <article class="card blog-card">
+          <p class="badge">Coming soon</p>
+          <h3>Static website vs WordPress vs Wix</h3>
+          <p>
+            When to use a simple HTML/CSS site, when WordPress is better, and
+            when Wix makes sense – with real-life examples.
+          </p>
+        </article>
+
+        <article class="card blog-card">
+          <p class="badge">Coming soon</p>
+          <h3>My experiment log</h3>
+          <p>
+            A log of the small experiments I do on this site: SEO tests, UI
+            changes, performance tweaks and other ideas.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIALS (COMMENTED) ===================== -->
+  <!--
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2 class="section-title">What Clients Say</h2>
+      <div class="cards-grid">
+        <article class="card">
+          <p>"In the future, client feedback and testimonials will be shown here."</p>
+          <p class="muted">– Client Name</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" class="section">
+    <div class="container two-col">
+      <div>
+        <h2>Contact</h2>
+        <p>
+          If you need help with SEO, want to build a website, or just want to
+          collaborate or experiment together, you can contact me directly on WhatsApp.
+        </p>
+        <p>
+          I try to reply to messages as soon as possible.
+        </p>
+
+        <a
+          href="https://wa.me/91XXXXXXXXXX?text=Hi%20Jitesh%2C%20I%20came%20from%20your%20website%20rdsgn.in"
+          class="btn primary-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Chat on WhatsApp
+        </a>
+
+        <p class="small-note">
+          🔁 <strong>Note:</strong> Replace <code>91XXXXXXXXXX</code> with your
+          WhatsApp number (with country code).
+        </p>
+      </div>
+
+      <div class="card info-card">
+        <h3>Quick Links</h3>
+        <ul class="info-list">
+          <li><a href="#portfolio">See my projects</a></li>
+          <li><a href="#blog">View planned blog topics</a></li>
+          <li><a href="#services">Check services</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> rdsgn • Redesign Digital. All rights reserved.</p>
+      <p class="footer-note">
+        Built with HTML, CSS & JS. Hosted on GitHub Pages. Used as a learning playground and portfolio.
+      </p>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
