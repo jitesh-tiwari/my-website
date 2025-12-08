@@ -1,24 +1,31 @@
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container nav-container">
-    <div class="logo">
-      <span class="logo-main">rdsgn</span>
-      <span class="logo-sub">Redesign Digital</span>
+    <!-- Logo -->
+    <div class="logo" aria-hidden="false">
+      <a href="/" class="logo-link" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;color:inherit;">
+        <!-- simple text logo; replace with an <img> if you have one -->
+        <span class="logo-main">rdsgn</span>
+        <span class="logo-sub">Redesign Digital</span>
+      </a>
     </div>
 
-    <nav class="main-nav" id="mainNav">
+    <!-- Main navigation -->
+    <nav id="mainNav" class="main-nav" role="navigation" aria-label="Main navigation">
       <a href="/">Home</a>
       <a href="/#about">About</a>
       <a href="/#services">Services</a>
       <a href="/#portfolio">Portfolio</a>
       <a href="/blog/">Blog</a>
       <a href="/#contact">Contact</a>
-      <button id="themeToggle" class="theme-toggle" type="button">
-        🌙
-      </button>
     </nav>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-      ☰
-    </button>
+    <!-- Controls: theme toggle + mobile menu toggle -->
+    <div class="nav-controls" role="group" aria-label="Navigation controls">
+      <!-- Theme toggle (visible even before mobile menu opens) -->
+      <button id="themeToggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle light or dark theme">🌙</button>
+
+      <!-- Mobile nav toggle (hamburger) -->
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle navigation menu">☰</button>
+    </div>
   </div>
 </header>
