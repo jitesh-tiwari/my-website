@@ -14,16 +14,24 @@
   --radius-xl: 24px;
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
 }
-/* Light theme overrides */
+/* -----------------------------
+   Light theme
+   ----------------------------- */
 :root[data-theme="light"] {
-  --bg: #f3f4f6;
-  --bg-elevated: #ffffff;
-  --bg-muted: #e5e7eb;
+  --bg: #ffffff;
+  --bg-elevated: #fbfbfd;
+  --bg-muted: #f3f4f6;
   --surface: #ffffff;
-  --border-subtle: #d1d5db;
-  --text: #111827;
+
+  --border-subtle: #e6e7eb;
+  --shadow-soft: 0 10px 30px rgba(16, 24, 40, 0.06);
+
+  --text: #0f1724;
   --text-muted: #6b7280;
-  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+
+  --primary: #2563eb;
+  --primary-soft: rgba(37, 99, 235, 0.12);
+  --secondary: #f97316;
 }
 
 
@@ -49,6 +57,28 @@ body {
 body {
   min-height: 100vh;
 }
+
+/* Light mode fixes */
+:root[data-theme="light"] body {
+  background: var(--bg);
+}
+
+:root[data-theme="light"] .card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* theme toggle button */
+.theme-toggle {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-subtle);
+}
+:root[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.03);
+}
+
 
 /* ===================== GLOBAL UTILS ===================== */
 
@@ -454,20 +484,5 @@ body {
   .cards-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-}
-
-.theme-toggle {
-  border: none;
-  background: rgba(15, 23, 42, 0.5);
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-  cursor: pointer;
-  color: var(--text);
-}
-
-:root[data-theme="light"] .theme-toggle {
-  background: rgba(243, 244, 246, 0.9);
 }
 
