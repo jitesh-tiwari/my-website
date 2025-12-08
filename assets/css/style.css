@@ -1,110 +1,60 @@
-/* =========================================
-   THEME VARIABLES — DARK THEME (default)
-      ========================================= */
+/* =========================================================
+   RESET + GLOBAL VARIABLES (DARK THEME DEFAULT)
+   ========================================================= */
 :root {
   --primary: #2563eb;
-  --primary-soft: rgba(37, 99, 235, 0.12);
   --secondary: #f97316;
 
   --bg: #0f172a;
-  --bg-elevated: #020617;
-  --bg-muted: #020617;
-  --surface: #020617;
+  --bg-elevated: #1e293b;
+  --bg-muted: #0f172a;
 
-  --border-subtle: #1f2937;
+  --surface: #1e293b;
+
   --text: #e5e7eb;
-  --text-muted: #9ca3af;
+  --text-muted: #94a3b8;
+
+  --border-subtle: #334155;
+
+  --shadow-soft: 0 12px 35px rgba(0,0,0,0.45);
 
   --radius-lg: 18px;
   --radius-xl: 24px;
-  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
 }
 
-/* =========================================
-                                   LIGHT THEME VARIABLES
-                                      ========================================= */
+/* ==========================
+   LIGHT THEME VARIABLES
+   ========================== */
 :root[data-theme="light"] {
   --bg: #ffffff;
-  --bg-elevated: #fbfbfd;
-  --bg-muted: #f3f4f6;
+  --bg-elevated: #f8f9fa;
+  --bg-muted: #f0f2f5;
+
   --surface: #ffffff;
 
-  --border-subtle: #e6e7eb;
-  --shadow-soft: 0 10px 30px rgba(16, 24, 40, 0.06);
+  --text: #0f172a;
+  --text-muted: #64748b;
 
-  --text: #0f1724;
-  --text-muted: #6b7280;
+  --border-subtle: #d0d4da;
 
-  --primary: #2563eb;
-  --primary-soft: rgba(37, 99, 235, 0.12);
-  --secondary: #f97316;
+  --shadow-soft: 0 8px 25px rgba(0,0,0,0.06);
 }
 
-/* =========================================
-                                                               LIGHT THEME OVERRIDES
-                                                                  ========================================= */
-:root[data-theme="light"] body,
-:root[data-theme="light"] h1,
-:root[data-theme="light"] h2,
-:root[data-theme="light"] h3,
-:root[data-theme="light"] h4,
-:root[data-theme="light"] h5,
-:root[data-theme="light"] h6,
-:root[data-theme="light"] p,
-:root[data-theme="light"] li,
-:root[data-theme="light"] span,
-:root[data-theme="light"] a {
-  color: var(--text) !important;
-}
+/* ==========================
+   BASE RESET
+   ========================== */
 
-:root[data-theme="light"] .muted,
-:root[data-theme="light"] .hero-subtitle,
-:root[data-theme="light"] .section-subtitle,
-:root[data-theme="light"] .info-list li span:first-child {
-  color: var(--text-muted) !important;
-}
-
-:root[data-theme="light"] body {
-  background: var(--bg) !important;
-}
-
-/* Header light mode */
-:root[data-theme="light"] .site-header {
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border-subtle);
-  backdrop-filter: none;
-}
-
-/* Cards in light */
-:root[data-theme="light"] .card,
-:root[data-theme="light"] .hero-card,
-:root[data-theme="light"] .info-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle) !important;
-  box-shadow: var(--shadow-soft);
-}
-
-/* Footer light */
-:root[data-theme="light"] .site-footer {
-  background: var(--bg-elevated);
-  border-top: 1px solid var(--border-subtle);
-}
-
-/* =========================================
-                                                                                           GLOBAL RESET
-                                                                                              ========================================= */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, sans-serif;
-  background: radial-gradient(circle at top left, #1e293b, var(--bg));
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
   min-height: 100vh;
@@ -115,9 +65,28 @@ img {
   height: auto;
 }
 
-/* =========================================
-                                                                                                                 LAYOUT HELPERS
-                                                                                                                    ========================================= */
+/* Anchor reset */
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.text-link {
+  color: var(--primary);
+  text-decoration: none;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+
+/* Containers */
 .container {
   width: 100%;
   max-width: 1120px;
@@ -126,46 +95,42 @@ img {
 }
 
 .section {
-  padding: 4.5rem 0;
+  padding: 4rem 0;
 }
 
 .section-muted {
-  background: radial-gradient(circle at top, #111827, #020617);
+  background: var(--bg-muted);
 }
 
-:root[data-theme="light"] .section-muted {
-  background: var(--bg-muted) !important;
-}
-
-/* =========================================
-                                                                                                                                     HEADER (STICKY)
-                                                                                                                                        ========================================= */
+/* =========================================================
+   HEADER
+   ========================================================= */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 9999;
-  backdrop-filter: blur(12px);
-  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(14px);
+  background: rgba(15, 23, 42, 0.65);
   overflow: visible;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.25rem;
+  padding: .75rem 1rem;
 }
 
-/* LOGO */
 .logo-main {
   font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: .95rem;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  letter-spacing: .12em;
 }
 
 .logo-sub {
-  font-size: 0.7rem;
+  font-size: .7rem;
   color: var(--text-muted);
 }
 
@@ -176,68 +141,194 @@ img {
   align-items: center;
 }
 
-/* THEME + HAMBURGER AREA */
+.main-nav a {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.main-nav a:hover {
+  color: var(--text);
+}
+
+/* HEADER CONTROLS */
 .nav-controls {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
+  gap: .5rem;
+  z-index: 12000;
 }
 
+/* THEME TOGGLE */
 .theme-toggle {
+  padding: .35rem .6rem;
+  border-radius: 8px;
   border: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   color: var(--text);
-  padding: 0.35rem 0.6rem;
-  border-radius: 10px;
-  cursor: pointer;
+  font-size: 1rem;
 }
 
-:root[data-theme="light"] .theme-toggle {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-/* Hamburger button */
+/* MOBILE MENU BUTTON */
 .nav-toggle {
   display: none;
   border: 1px solid var(--border-subtle);
-  background: rgba(15, 23, 42, 0.8);
-  color: var(--text);
-  font-size: 1.3rem;
-  padding: 0.4rem 0.7rem;
+  padding: .4rem .7rem;
   border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.25rem;
   cursor: pointer;
 }
 
-:root[data-theme="light"] .nav-toggle {
-  background: rgba(0, 0, 0, 0.03);
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  font-size: .65rem;
+  letter-spacing: .15em;
+  color: var(--text-muted);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 3vw, 2.7rem);
+  margin: .5rem 0 1rem;
+}
+
+.hero-subtitle {
+  color: var(--text-muted);
+  max-width: 620px;
+}
+
+.hero-actions {
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .65rem 1.4rem;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: .12s ease;
+}
+
+.btn:active {
+  transform: scale(.97);
+}
+
+.primary-btn {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(37,99,235,.3);
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   color: var(--text);
 }
 
-/* =========================================
-                                                                                                                                                                                                                         MOBILE NAV (FINAL — SAME WIDTH BOTH THEMES)
-                                                                                                                                                                                                                            ========================================= */
-@media (max-width: 700px) {
-  .nav-toggle {
-    display: inline-flex;
-  }
+/* =========================================================
+   CARDS (Services, Blog, Portfolio)
+   ========================================================= */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-soft);
+}
 
+.badge {
+  font-size: .7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: .15rem .5rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  background: var(--bg-elevated);
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer-note {
+  color: var(--text-muted);
+  font-size: .8rem;
+  max-width: 500px;
+  margin: .5rem auto 0;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .nav-toggle { display: inline-flex; }
+
+  /* Mobile nav dropdown */
   .main-nav {
-    position: absolute !important;
-    right: 1.25rem;
+    position: absolute;
     top: 3.2rem;
+    right: 1rem;
     flex-direction: column;
     align-items: flex-start;
-    background: var(--bg-elevated) !important;
+    background: var(--surface);
+    padding: .6rem .9rem;
     border-radius: 12px;
-    padding: 0.6rem 0.9rem;
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.10);
+    box-shadow: var(--shadow-soft);
     display: none;
-    z-index: 110;
-    min-width: 200px;
-    max-width: 260px;
-    width: clamp(200px, 45vw, 260px);
-    transition: none !important;
+    min-width: 180px; /* AUTO WIDTH */
+    width: auto;
   }
 
   .main-nav.open {
@@ -245,54 +336,10 @@ img {
   }
 
   .main-nav a {
+    padding: .55rem .75rem;
     width: 100%;
-    padding: 0.5rem 0.75rem;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border-radius: 8px;
   }
 
-  .main-nav a:hover {
-    background: rgba(0, 0, 0, 0.04);
-  }
-}
-
-/* =========================================
-                                                                                                                                                                                                                                                                                                                                                     HERO, CARD, FOOTER (unchanged except theme vars)
-                                                                                                                                                                                                                                                                                                                                                        ========================================= */
-.hero {
-  padding: 4.5rem 0 4rem;
-}
-
-/* Card */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 1.4rem;
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-soft);
-}
-
-/* Footer */
-.site-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: 1.5rem 0 2rem;
-  text-align: center;
-  background: var(--bg-elevated);
-}
-
-/* =========================================
-                                                                                                                                                                                                                                                                                                                                                                             RESPONSIVE GRID
-                                                                                                                                                                                                                                                                                                                                                                                ========================================= */
-@media (max-width: 900px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 700px) {
   .cards-grid {
     grid-template-columns: 1fr;
   }

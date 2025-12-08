@@ -1,49 +1,49 @@
-/* ===============================
-  FINAL main.js — Component loader + Theme + Mobile Nav + Smooth Scroll
-  File: assets/js/main.js
-  =============================== */
+/* =========================================================
+   main.js — Component Loader + Theme Toggle + Mobile Nav
+   ========================================================= */
 
-(() => {
-  // --- small helpers ---
+(function () {
   const $ = (s) => document.querySelector(s);
-  const $$ = (s) => Array.from(document.querySelectorAll(s));
-  const isMobileWidth = () => window.innerWidth <= 700;
+  const $$ = (s) => document.querySelectorAll(s);
 
-  // --- determine components path (works from root and subfolders like /blog/) ---
-  function componentsBasePath() {
+  /* --------------------------------------------
+     DETECT COMPONENT PATH (supports /blog/* pages)
+     -------------------------------------------- */
+  function getComponentsPath() {
     const path = window.location.pathname;
-    // If page is in a nested folder (e.g. /blog/...), components are ../components/
-    const segments = path.split('/').filter(Boolean);
-    // If segments length >= 2 OR starts with 'blog', go up one level
-    if (segments.length >= 2 || segments[0] === 'blog') {
-      return '../components/';
+    const segments = path.split("/").filter(Boolean);
+
+    if (segments.length >= 2) {
+      return "../components/";
     }
-    return 'components/';
+    return "components/";
   }
 
-  // --- fetch and inject component with fallback html ---
-  async function loadComponent(targetId, filename, fallbackHtml = '') {
+  /* --------------------------------------------
+     LOAD COMPONENT (header / footer)
+     -------------------------------------------- */
+  async function loadComponent(targetId, fileName, fallback = "") {
     const target = document.getElementById(targetId);
-    if (!target) return false;
-    const base = componentsBasePath();
-    const url = base + filename;
+    if (!target) return;
+
+    const base = getComponentsPath();
+    const url = base + fileName;
 
     try {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error("Fetch failed");
       const html = await res.text();
       target.innerHTML = html;
-      return true;
     } catch (err) {
-      console.warn('Could not load component:', url, err);
-      // insert fallback so UI never breaks
-      target.innerHTML = fallbackHtml;
-      return false;
+      console.warn("Component load failed:", url, err);
+      target.innerHTML = fallback;
     }
   }
 
-  // --- fallback header & footer (minimal, used only if fetch fails) ---
-  const headerFallback = `
+  /* --------------------------------------------
+     FALLBACK HEADER + FOOTER (if fetch fails)
+     -------------------------------------------- */
+  const fallbackHeader = `
     <header class="site-header">
       <div class="container nav-container">
         <div class="logo">
@@ -51,7 +51,7 @@
           <span class="logo-sub">Redesign Digital</span>
         </div>
 
-        <nav class="main-nav" id="mainNav">
+        <nav id="mainNav" class="main-nav">
           <a href="/">Home</a>
           <a href="/#about">About</a>
           <a href="/#services">Services</a>
@@ -61,194 +61,159 @@
         </nav>
 
         <div class="nav-controls">
-          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-          <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+          <button id="themeToggle" class="theme-toggle">🌙</button>
+          <button id="navToggle" class="nav-toggle">☰</button>
         </div>
       </div>
     </header>
   `;
 
-  const footerFallback = `
+  const fallbackFooter = `
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© <span id="year"></span> rdsgn • Redesign Digital. All rights reserved.</p>
-        <p class="footer-note">Built with HTML, CSS & JS. Hosted on GitHub Pages.</p>
+        <p><strong>rdsgn</strong> — Redesign Digital</p>
+        <p class="footer-note">© <span id="year"></span> All rights reserved.</p>
       </div>
     </footer>
   `;
 
-  // --- initialization utilities ---
-  function initYear() {
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-  }
-
-  function getStoredTheme() {
-    return localStorage.getItem('theme');
-  }
-
-  function setStoredTheme(theme) {
-    localStorage.setItem('theme', theme);
-  }
-
+  /* --------------------------------------------
+     THEME TOGGLE SYSTEM (light / dark)
+     -------------------------------------------- */
   function applyTheme(theme) {
-    const root = document.documentElement;
-    if (theme === 'light') root.setAttribute('data-theme', 'light');
-    else root.setAttribute('data-theme', 'dark');
-    updateThemeToggleUI();
-  }
+    document.documentElement.setAttribute("data-theme", theme);
 
-  function updateThemeToggleUI() {
-    const root = document.documentElement;
-    const theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    const toggles = $$('button#themeToggle, button.theme-toggle');
-    toggles.forEach(btn => {
-      // show sun for light, moon for dark
-      btn.textContent = theme === 'light' ? '☀️' : '🌙';
-      btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+    const toggles = $$("button#themeToggle, .theme-toggle");
+    toggles.forEach((btn) => {
+      btn.textContent = theme === "light" ? "☀️" : "🌙";
+      btn.setAttribute("aria-pressed", theme === "light");
     });
+
+    localStorage.setItem("theme", theme);
   }
 
-  // --- delegated theme toggle listener (works even if button injected later) ---
-  function initThemeToggleListener() {
-    document.addEventListener('click', (e) => {
-      const t = e.target;
-      if (!t) return;
-      if (t.id === 'themeToggle' || t.classList.contains('theme-toggle')) {
-        const root = document.documentElement;
-        const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        applyTheme(now);
-        setStoredTheme(now);
+  function initTheme() {
+    const stored = localStorage.getItem("theme");
+    if (stored) {
+      applyTheme(stored);
+    } else {
+      applyTheme("dark"); // default
+    }
+
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("#themeToggle")) {
+        const current =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "dark"
+            : "light";
+        applyTheme(current);
       }
     });
   }
 
-  // --- mobile nav toggle behavior ---
-  function initNavToggle() {
-    // Using delegated queries to support injected header
-    const navToggle = document.getElementById('navToggle') || $('.nav-toggle');
-    const mainNav = document.getElementById('mainNav') || $('.main-nav');
+  /* --------------------------------------------
+     MOBILE NAVIGATION BEHAVIOR
+     -------------------------------------------- */
+  function initMobileNav() {
+    const nav = $("#mainNav");
+    const toggle = $("#navToggle");
 
-    if (!navToggle || !mainNav) return;
+    if (!nav || !toggle) return;
 
-    // Ensure ARIA reflects state
-    function setNavAria(open) {
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    function openNav() {
+      nav.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
     }
 
-    navToggle.addEventListener('click', (ev) => {
-      ev.stopPropagation();
-      const opening = !mainNav.classList.contains('open');
-      mainNav.classList.toggle('open');
-      setNavAria(opening);
+    function closeNav() {
+      nav.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav.classList.contains("open") ? closeNav() : openNav();
     });
 
-    // Close nav on link click (mobile only)
-    mainNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        if (isMobileWidth()) {
-          mainNav.classList.remove('open');
-          setNavAria(false);
-        }
+    // Close when clicking outside
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth > 700) return;
+      if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+        closeNav();
+      }
+    });
+
+    // Close when pressing escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNav();
+    });
+
+    // Close after clicking a nav link (mobile only)
+    nav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        if (window.innerWidth <= 700) closeNav();
       });
     });
-
-    // Close when clicking outside (mobile)
-    document.addEventListener('click', (ev) => {
-      if (!isMobileWidth()) return;
-      if (!mainNav.contains(ev.target) && !navToggle.contains(ev.target)) {
-        if (mainNav.classList.contains('open')) {
-          mainNav.classList.remove('open');
-          setNavAria(false);
-        }
-      }
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Escape' && mainNav.classList.contains('open')) {
-        mainNav.classList.remove('open');
-        setNavAria(false);
-      }
-    });
-
-    // Prevent layout jumps: force width from computed style when opening (safety)
-    const openWatcher = new MutationObserver(() => {
-      if (mainNav.classList.contains('open')) {
-        // read computed width to stabilise layout (no inline style change)
-        const w = getComputedStyle(mainNav).width;
-        // set CSS variable if needed — avoid writing inline width unless necessary
-        // (we rely on CSS clamp; this is just a no-op read to stabilize reflow)
-        void w;
-      }
-    });
-    openWatcher.observe(mainNav, { attributes: true, attributeFilter: ['class'] });
   }
 
-  // --- smooth scroll for same-page anchors (works even for links with path+hash) ---
+  /* --------------------------------------------
+     SMOOTH SCROLL FOR #ANCHORS and /#anchors
+     -------------------------------------------- */
   function initSmoothScroll() {
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href]');
-      if (!a) return;
-      const href = a.getAttribute('href');
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest("a[href]");
+      if (!link) return;
+
+      const href = link.getAttribute("href");
       if (!href) return;
 
-      // handle simple hash links
-      if (href.startsWith('#')) {
-        const target = document.querySelector(href);
-        if (!target) return;
-        e.preventDefault();
-        const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 72);
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        // close mobile nav
-        const nav = document.getElementById('mainNav') || $('.main-nav');
-        if (nav && isMobileWidth()) nav.classList.remove('open');
-        return;
+      // Same page hash (#about)
+      if (href.startsWith("#")) {
+        const el = document.querySelector(href);
+        if (el) {
+          e.preventDefault();
+          const y = el.getBoundingClientRect().top + window.scrollY - 60;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
       }
 
-      // handle links like /#about or same-page path with hash
-      try {
-        const url = new URL(href, window.location.origin);
-        if (url.hash && url.pathname === window.location.pathname) {
-          const target = document.querySelector(url.hash);
-          if (!target) return;
-          e.preventDefault();
-          const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 72);
-          window.scrollTo({ top: y, behavior: 'smooth' });
-          const nav = document.getElementById('mainNav') || $('.main-nav');
-          if (nav && isMobileWidth()) nav.classList.remove('open');
-        }
-      } catch (err) {
-        // ignore invalid URLs
+      // Same-page /#about
+      if (href.includes("#")) {
+        try {
+          const url = new URL(href, window.location.origin);
+          if (url.pathname === window.location.pathname) {
+            const target = document.querySelector(url.hash);
+            if (target) {
+              e.preventDefault();
+              const y = target.offsetTop - 60;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }
+          }
+        } catch (err) {}
       }
     });
   }
 
-  // --- bootstrap: load components then initialize features ---
-  async function bootstrap() {
-    // load header/footer (try multiple times if necessary)
-    await loadComponent('site-header', 'header.html', headerFallback);
-    await loadComponent('site-footer', 'footer.html', footerFallback);
-
-    // prefer stored theme
-    const stored = getStoredTheme();
-    if (stored) applyTheme(stored);
-    else {
-      // if no stored, keep existing data-theme or default to dark
-      const root = document.documentElement;
-      const cur = root.getAttribute('data-theme');
-      applyTheme(cur === 'light' ? 'light' : 'dark');
-    }
-
-    // small delay for elements to be present
-    setTimeout(() => {
-      initYear();
-      initThemeToggleListener();
-      initNavToggle();
-      initSmoothScroll();
-    }, 40);
+  /* --------------------------------------------
+     YEAR UPDATE
+     -------------------------------------------- */
+  function updateYear() {
+    const y = $("#year");
+    if (y) y.textContent = new Date().getFullYear();
   }
 
-  // start on DOMContentLoaded
-  document.addEventListener('DOMContentLoaded', bootstrap);
+  /* --------------------------------------------
+     BOOTSTRAP
+     -------------------------------------------- */
+  async function start() {
+    await loadComponent("site-header", "header.html", fallbackHeader);
+    await loadComponent("site-footer", "footer.html", fallbackFooter);
+
+    initTheme();
+    initMobileNav();
+    initSmoothScroll();
+    updateYear();
+  }
+
+  document.addEventListener("DOMContentLoaded", start);
 })();

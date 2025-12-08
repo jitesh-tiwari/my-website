@@ -1,201 +1,198 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>rdsgn — Redesign Digital | SEO & Web Development</title>
-  <meta name="description"
-    content="rdsgn (Redesign Digital) — Jitesh's personal playground, portfolio and SEO & website services." />
+  <title>rdsgn — Redesign Digital | SEO & Website Services</title>
+  <meta name="description" content="rdsgn (Redesign Digital) — Jitesh's portfolio and playground for SEO & website-making services." />
 
-  <!-- Link to main stylesheet -->
+  <!-- Open Graph (basic) -->
+  <meta property="og:title" content="rdsgn — Redesign Digital" />
+  <meta property="og:description" content="Simple websites, SEO audits and small-project support — by Jitesh." />
+  <meta property="og:type" content="website" />
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="/assets/css/style.css" />
-</head>
 
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="/favicon.ico" />
+</head>
 <body>
 
-  <!-- Header component will be injected here by main.js -->
-  <div id="site-header"></div>
+  <!-- Header component (injected by main.js) -->
+  <div id="site-header" aria-hidden="false"></div>
 
-  <!-- ======= HERO ======= -->
-  <main id="home" class="section">
+  <!-- HERO -->
+  <header id="home" class="section" role="banner" aria-label="Home section">
     <div class="container hero-inner">
       <div>
         <p class="eyebrow">Hello — I'm Jitesh</p>
         <h1>
-          I build clean websites & do SEO that actually helps real people.
+          I build clean websites and do SEO that actually helps people.
         </h1>
         <p class="hero-subtitle">
-          I am learning, experimenting and offering simple SEO & website-making services.
-          This site is a playground where I publish notes, projects and case studies.
+          This website is my playground: portfolio, experiments, and service notes.
+          I offer simple SEO audits and lightweight websites — ideal for small projects.
         </p>
 
         <div class="hero-actions">
-          <a class="btn primary-btn" href="/#portfolio">View portfolio</a>
-          <a class="btn ghost-btn"
-            href="https://wa.me/91XXXXXXXXXX?text=Hi%20Jitesh%2C%20I%20came%20from%20your%20website%20rdsgn.in"
-            target="_blank" rel="noopener">Contact on WhatsApp</a>
+          <a class="btn primary-btn" href="#portfolio">View portfolio</a>
+          <a class="btn ghost-btn" href="https://wa.me/919XXXXXXXXX?text=Hi%20Jitesh%2C%20I%20found%20you%20on%20rdsgn.in" target="_blank" rel="noopener">Contact on WhatsApp</a>
         </div>
 
         <p class="hero-note">
-          Current focus: SEO audits, simple static websites, and hands-on experiments with web performance.
+          Current focus: performance-friendly static sites, WordPress basics, and SEO for small businesses.
         </p>
       </div>
 
-      <!-- Hero side card -->
-      <aside class="hero-card">
+      <aside class="hero-card" aria-label="Quick facts">
         <h2>Quick facts</h2>
         <ul>
-          <li><strong>Role:</strong> SEO Analyst | Web Developer</li>
+          <li><strong>Role:</strong> SEO Analyst & Web Developer</li>
           <li><strong>Experience:</strong> 3+ years</li>
-          <li><strong>Tech:</strong> HTML, CSS, JS, WordPress, Bootstrap</li>
-          <li><strong>Tools:</strong> Google Analytics, Search Console, SEMrush, Ahrefs</li>
+          <li><strong>Tech:</strong> HTML, CSS, JavaScript, WordPress</li>
+          <li><strong>Tools:</strong> Google Analytics, Search Console, Ahrefs, SEMrush</li>
         </ul>
       </aside>
     </div>
-  </main>
+  </header>
 
-  <!-- ======= ABOUT ======= -->
-  <section id="about" class="section">
+  <!-- ABOUT -->
+  <section id="about" class="section" aria-labelledby="about-title">
     <div class="container">
-      <h2 class="section-title">About</h2>
+      <h2 id="about-title" class="section-title">About</h2>
       <p class="section-subtitle">
-        I build straightforward, fast websites and help small projects with SEO. This site is both my portfolio and my
-        learning space — every experiment here helps me grow and shows what I can do.
+        I build clear, fast websites and help small projects improve search visibility.
+        This site shows my work, experiments and notes — everything I use to learn and help clients.
       </p>
 
-      <div class="two-col" style="margin-top:1.5rem;">
+      <div class="two-col" style="margin-top:1.25rem;">
         <div>
           <p>
-            I work with static sites and small WordPress projects. I enjoy simplifying SEO into clear steps:
-            content, structure, and technical health.
+            I prefer simple, pragmatic solutions: fast static sites for speed and low maintenance, plus WordPress where clients need CMS.
           </p>
 
-          <h3 style="margin-top:1rem;">Skills</h3>
+          <h3 style="margin-top:1rem">Skills</h3>
           <ul class="skills-list">
             <li>HTML, CSS, JavaScript</li>
             <li>WordPress, Bootstrap</li>
             <li>On-page & off-page SEO</li>
-            <li>Google Analytics, Search Console</li>
+            <li>Google Analytics, Google Search Console</li>
           </ul>
         </div>
 
         <div>
           <div class="card info-card">
-            <h3>What I offer</h3>
+            <h3>Services overview</h3>
             <ul class="info-list">
-              <li><span>SEO Audit</span><span>From ₹ — (custom)</span></li>
-              <li><span>Website (static)</span><span>Starter sites</span></li>
-              <li><span>WordPress setup</span><span>Theme + basic SEO</span></li>
+              <li><span>SEO Audit</span><span>Report + prioritized fixes</span></li>
+              <li><span>Static Website</span><span>Fast, GitHub Pages deployable</span></li>
+              <li><span>WordPress Setup</span><span>Theme + basic SEO</span></li>
             </ul>
-            <p class="small-note">Want a custom plan? Contact me on WhatsApp.</p>
+            <p class="small-note">Want a custom plan? Message on WhatsApp.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ======= SERVICES ======= -->
-  <section id="services" class="section section-muted">
+  <!-- SERVICES -->
+  <section id="services" class="section section-muted" aria-labelledby="services-title">
     <div class="container">
-      <h2 class="section-title">Services</h2>
-      <p class="section-subtitle">Simple, clear services to help small websites perform better in search.</p>
+      <h2 id="services-title" class="section-title">Services</h2>
+      <p class="section-subtitle">Clear, focused services for small websites — audit, build, and improve.</p>
 
       <div class="cards-grid" style="margin-top:1.25rem;">
         <article class="card service-card">
           <p class="badge">SEO</p>
           <h3>SEO Audit & Fixes</h3>
-          <p>Site analysis, quick wins and a prioritized task list to improve search visibility.</p>
+          <p>Technical and content recommendations with an easy-to-follow priority list.</p>
         </article>
 
         <article class="card service-card">
           <p class="badge">Web</p>
           <h3>Static Website</h3>
-          <p>Lightweight HTML/CSS/JS websites that load fast and are easy to host on GitHub Pages.</p>
+          <p>Lightweight, fast HTML/CSS sites that are easy to host on GitHub Pages.</p>
         </article>
 
         <article class="card service-card">
           <p class="badge">WordPress</p>
           <h3>WP Setup & On-page SEO</h3>
-          <p>Install, configure theme, basic on-page SEO, and analytics setup.</p>
+          <p>Initial setup, theme configuration, and basic SEO settings.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ======= PORTFOLIO PREVIEW ======= -->
-  <section id="portfolio" class="section">
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section" aria-labelledby="portfolio-title">
     <div class="container">
-      <h2 class="section-title">Portfolio (Preview)</h2>
-      <p class="section-subtitle">A few small projects and experiments — more to come.</p>
+      <h2 id="portfolio-title" class="section-title">Portfolio (preview)</h2>
+      <p class="section-subtitle">Small projects, demos and experiments — more will be added over time.</p>
 
       <div class="cards-grid" style="margin-top:1.25rem;">
         <article class="card portfolio-card">
           <h3>Demo Business Site</h3>
-          <p>Simple one-page site built for a local demo client — responsive and SEO-ready.</p>
-          <p class="text-link"><a href="#" class="text-link disabled">Live / Coming soon</a></p>
+          <p>One-page responsive site built for a local demo client — SEO-ready and fast.</p>
         </article>
 
         <article class="card portfolio-card">
           <h3>Mini JS Game</h3>
-          <p>Small JavaScript game I used to test interactions and animations.</p>
+          <p>Small JavaScript game project for testing interactions and UI animation.</p>
         </article>
 
         <article class="card portfolio-card">
           <h3>SEO Case Study</h3>
-          <p>A short case study showing traffic improvements after basic SEO fixes.</p>
+          <p>Short case study showing traffic improvements after prioritized SEO fixes.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ======= BLOG PREVIEW ======= -->
-  <section id="blog" class="section section-muted">
+  <!-- BLOG PREVIEW -->
+  <section id="blog" class="section section-muted" aria-labelledby="blog-title">
     <div class="container">
-      <h2 class="section-title">Blog</h2>
-      <p class="section-subtitle">Short notes and experiments about SEO and web development.</p>
+      <h2 id="blog-title" class="section-title">Blog</h2>
+      <p class="section-subtitle">Notes and short guides on SEO and web development.</p>
 
       <div class="cards-grid" style="margin-top:1.25rem;">
         <article class="card blog-card">
           <p class="badge">SEO · Basics</p>
-          <h3><a href="/blog/seo-basics.html">SEO Basics in Simple Words</a></h3>
-          <p>A beginner-friendly explanation of what SEO is and how to get started.</p>
+          <h3><a class="text-link" href="/blog/seo-basics.html">SEO Basics in Simple Words</a></h3>
+          <p>Beginner-friendly explanation of SEO and first steps to improve your site.</p>
         </article>
 
         <article class="card blog-card">
           <p class="badge">Static · Tools</p>
-          <h3><a href="/blog/static-vs-wordpress.html">Static HTML vs WordPress: When to use each</a></h3>
-          <p>Short comparison to help you pick the right approach for small projects.</p>
+          <h3><a class="text-link" href="/blog/static-vs-wordpress.html">Static HTML vs WordPress</a></h3>
+          <p>Short comparison to help you decide which approach fits your small project.</p>
         </article>
 
         <article class="card blog-card">
           <p class="badge">Experiments</p>
           <h3>Performance experiments</h3>
-          <p>Notes from testing load speed, images and Lighthouse improvements.</p>
+          <p>Notes from Lighthouse tests, images, and simple performance wins.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ======= CONTACT ======= -->
-  <section id="contact" class="section">
+  <!-- CONTACT -->
+  <section id="contact" class="section" aria-labelledby="contact-title">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
+      <h2 id="contact-title" class="section-title">Contact</h2>
       <p class="section-subtitle">I prefer WhatsApp for quick messages. No contact form — message me there.</p>
 
       <div style="margin-top:1rem;">
-        <a class="btn primary-btn"
-          href="https://wa.me/91XXXXXXXXXX?text=Hi%20Jitesh%2C%20I%20found%20you%20on%20rdsgn.in" target="_blank"
-          rel="noopener">Message on WhatsApp</a>
+        <a class="btn primary-btn" href="https://wa.me/919XXXXXXXXX?text=Hi%20Jitesh%2C%20I%20found%20you%20on%20rdsgn.in" target="_blank" rel="noopener">Message on WhatsApp</a>
       </div>
     </div>
   </section>
 
-  <!-- Footer component will be injected here by main.js -->
-  <div id="site-footer"></div>
+  <!-- Footer component (injected by main.js) -->
+  <div id="site-footer" aria-hidden="false"></div>
 
-  <!-- Main JS (component loader + theme + nav) -->
+  <!-- main script (component loader + theme + nav) -->
   <script src="/assets/js/main.js"></script>
 </body>
-
 </html>
