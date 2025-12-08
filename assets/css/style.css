@@ -21,24 +21,19 @@
 
 /* -----------------------------
    Light theme variables (only variables)
-   Change these to adjust light theme look
    ----------------------------- */
 :root[data-theme="light"] {
-  /* Backgrounds */
   --bg: #ffffff;
   --bg-elevated: #fbfbfd;
   --bg-muted: #f3f4f6;
   --surface: #ffffff;
 
-  /* Borders & shadows */
   --border-subtle: #e6e7eb;
   --shadow-soft: 0 10px 30px rgba(16, 24, 40, 0.06);
 
-  /* Text */
   --text: #0f1724;
   --text-muted: #6b7280;
 
-  /* Keep brand accents same */
   --primary: #2563eb;
   --primary-soft: rgba(37, 99, 235, 0.12);
   --secondary: #f97316;
@@ -154,34 +149,30 @@
 :root[data-theme="light"] body {
   background: var(--bg);
 }
+
 /* =========================
    Fix: Service & Blog sections in light mode
-   Paste this after your :root[data-theme="light"] rules
    ========================= */
 
 :root[data-theme="light"] .section-muted {
-  /* replace dark radial gradient with soft light background */
   background: var(--bg-muted) !important;
   color: var(--text) !important;
 }
 
-/* Ensure section-muted containers use normal padding/contrast */
 :root[data-theme="light"] .section-muted .container {
   color: var(--text);
 }
 
-/* Cards inside section-muted (services, blog list, etc.) */
 :root[data-theme="light"] .section-muted .card,
 :root[data-theme="light"] .section-muted .service-card,
 :root[data-theme="light"] .section-muted .blog-card,
 :root[data-theme="light"] .section-muted .portfolio-card {
-  background: var(--surface) !important;      /* white / off-white */
+  background: var(--surface) !important;
   border: 1px solid var(--border-subtle) !important;
   box-shadow: var(--shadow-soft);
   color: var(--text);
 }
 
-/* Headings and subtitles inside section-muted */
 :root[data-theme="light"] .section-muted .section-title,
 :root[data-theme="light"] .section-muted h1,
 :root[data-theme="light"] .section-muted h2,
@@ -189,7 +180,6 @@
   color: var(--text) !important;
 }
 
-/* Paragraphs and small text */
 :root[data-theme="light"] .section-muted p,
 :root[data-theme="light"] .section-muted .section-subtitle,
 :root[data-theme="light"] .section-muted .hero-subtitle,
@@ -198,30 +188,20 @@
   color: var(--text-muted) !important;
 }
 
-/* Link/buttons contrast inside muted sections */
 :root[data-theme="light"] .section-muted .primary-btn,
 :root[data-theme="light"] .section-muted .small-btn,
 :root[data-theme="light"] .section-muted .ghost-btn {
   color: inherit;
 }
 
-/* If any inner element used dark gradient, neutralize it */
 :root[data-theme="light"] .section-muted .hero-card,
 :root[data-theme="light"] .section-muted .card .hero-card {
   background: var(--surface) !important;
 }
 
-/* Make sure the cards-grid spacing stays visible on light */
 :root[data-theme="light"] .cards-grid {
   gap: 1.6rem;
 }
-
-/* Safety: any element inside section-muted that is forced black */
-:root[data-theme="light"] .section-muted [style*="color:#000"],
-:root[data-theme="light"] .section-muted [style*="color: #000"] {
-  color: var(--text) !important;
-}
-
 
 /* ===================== GLOBAL UTILS ===================== */
 
@@ -335,7 +315,7 @@ body {
   width: 100%;
 }
 
-/* Mobile nav toggle */
+/* Mobile nav toggle (desktop default hidden) */
 .nav-toggle {
   display: none;
   border: none;
@@ -625,11 +605,13 @@ body {
   }
 }
 
+/* Consolidated mobile nav rules (single block) */
 @media (max-width: 700px) {
   .nav-toggle {
     display: inline-flex;
   }
 
+  /* Default mobile nav (hidden) */
   .main-nav {
     position: absolute;
     right: 1.25rem;
@@ -644,8 +626,22 @@ body {
     display: none;
   }
 
+  /* Open state for dark theme */
   .main-nav.open {
     display: flex;
+  }
+
+  .main-nav a {
+    color: var(--text-muted);
+    padding: 0.6rem 0.9rem;
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .main-nav a:hover {
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
   }
 
   .hero {
@@ -672,40 +668,47 @@ img {
 }
 
 /* =========================
-   Mobile navbar: light-mode fixes
-   Paste after your :root[data-theme="light"] block
+   Mobile navbar: light-mode fixes (single consolidated block)
+   Put these near end so they override defaults
    ========================= */
-
 @media (max-width: 700px) {
-  /* Make mobile nav panel light and soft in light mode */
   :root[data-theme="light"] .main-nav {
     position: absolute;
     right: 1.25rem;
     top: 3.1rem;
     flex-direction: column;
     align-items: flex-start;
-    background: var(--bg-elevated) !important; /* off-white / card color */
+    background: var(--bg-elevated) !important;
     border-radius: 12px;
     padding: 0.6rem 0.9rem;
     border: 1px solid var(--border-subtle);
     box-shadow: 0 10px 30px rgba(16,24,40,0.06);
-    display: none; /* default hidden, open toggles display via .open */
-    z-index: 110; /* above header */
-    min-width: 180px;
+    display: none;
+    z-index: 110;
+    min-width: 200px;
+    max-width: 260px;
+    width: clamp(200px, 45vw, 260px);
+    box-sizing: border-box;
+    transition: none;
+    transform: none;
   }
 
-  /* When open, show as flexible column */
   :root[data-theme="light"] .main-nav.open {
     display: flex;
+    width: clamp(200px, 45vw, 260px);
+    min-width: 200px;
+    max-width: 260px;
   }
 
-  /* Links inside mobile panel */
   :root[data-theme="light"] .main-nav a {
     color: var(--text-muted);
-    padding: 0.55rem 0.8rem;
+    padding: 0.5rem 0.75rem;
     width: 100%;
     display: block;
     border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   :root[data-theme="light"] .main-nav a:hover {
@@ -713,7 +716,6 @@ img {
     color: var(--text);
   }
 
-  /* Make the little toggle button visible and matching */
   :root[data-theme="light"] .nav-toggle {
     display: inline-flex;
     background: rgba(0,0,0,0.03);
@@ -722,48 +724,77 @@ img {
     padding: 0.35rem 0.7rem;
   }
 
-  /* If your header has blur/shadow, make sure nav doesn't inherit heavy dark blur */
   :root[data-theme="light"] .site-header {
     backdrop-filter: none;
     background: var(--bg-elevated);
+    overflow: visible;
   }
 }
+
 /* =========================
-   Mobile nav size fix (light theme)
-   Keeps the mobile nav panel width stable when opened
-   Paste after other light-mode mobile nav rules
+   Final high-specificity overrides (safety net)
+   Place at very end
    ========================= */
-
 @media (max-width: 700px) {
-  /* fixed width for the mobile nav panel and smooth layout */
-  :root[data-theme="light"] .main-nav {
-    min-width: 200px;        /* minimum width */
-    max-width: 260px;        /* maximum width to prevent growing too large */
-    width: auto;             /* allow content-based width within min/max */
-    box-sizing: border-box;
-    padding: 0.6rem 0.9rem;
-    transition: none;        /* disable size-changing transitions */
-    transform-origin: top right;
+  :root[data-theme="light"] body .main-nav,
+  :root[data-theme="light"] .main-nav,
+  body[data-theme="light"] .main-nav {
+    position: absolute !important;
+    right: 1.25rem !important;
+    top: 3.1rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    background: var(--bg-elevated) !important;
+    border-radius: 12px !important;
+    padding: 0.6rem 0.9rem !important;
+    border: 1px solid var(--border-subtle) !important;
+    box-shadow: 0 10px 30px rgba(16,24,40,0.06) !important;
+    display: none !important;
+    z-index: 9999 !important;
+    min-width: 200px !important;
+    max-width: 260px !important;
+    width: clamp(200px, 45vw, 260px) !important;
+    box-sizing: border-box !important;
+    transition: none !important;
+    transform: none !important;
   }
 
-  /* When nav opens, force the same width and avoid auto-resize */
+  :root[data-theme="light"] .main-nav.open,
+  body[data-theme="light"] .main-nav.open {
+    display: flex !important;
+    width: clamp(200px, 45vw, 260px) !important;
+    min-width: 200px !important;
+    max-width: 260px !important;
+  }
+
+  :root[data-theme="light"] .main-nav,
   :root[data-theme="light"] .main-nav.open {
-    display: flex;
-    width: clamp(200px, 45vw, 260px); /* responsive but bounded */
-    min-width: 200px;
-    max-width: 260px;
+    background-image: none !important;
+    background: var(--bg-elevated) !important;
   }
 
-  /* Prevent inner links from forcing extra width */
   :root[data-theme="light"] .main-nav a {
-    white-space: nowrap;     /* don't wrap text to multiple lines */
-    overflow: hidden;
-    text-overflow: ellipsis; /* truncate long text */
-    padding: 0.5rem 0.75rem;
-    display: block;
+    color: var(--text-muted) !important;
+    padding: 0.5rem 0.75rem !important;
+    width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 
-  /* If you prefer full-width mobile menu, replace the above .open rule
-     with: width: calc(100% - 32px); left: 16px; right: 16px; (but we keep boxed style now) */
-}
+  :root[data-theme="light"] .main-nav a:hover {
+    background: rgba(0,0,0,0.03) !important;
+    color: var(--text) !important;
+  }
 
+  :root[data-theme="light"] .site-header {
+    overflow: visible !important;
+    backdrop-filter: none !important;
+    background: var(--bg-elevated) !important;
+  }
+
+  :root[data-theme="light"] .main-nav,
+  :root[data-theme="light"] .main-nav.open {
+    will-change: auto !important;
+  }
+}
