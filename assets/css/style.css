@@ -670,3 +670,61 @@ img {
   pointer-events: none;
   opacity: 0.85;
 }
+
+/* =========================
+   Mobile navbar: light-mode fixes
+   Paste after your :root[data-theme="light"] block
+   ========================= */
+
+@media (max-width: 700px) {
+  /* Make mobile nav panel light and soft in light mode */
+  :root[data-theme="light"] .main-nav {
+    position: absolute;
+    right: 1.25rem;
+    top: 3.1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--bg-elevated) !important; /* off-white / card color */
+    border-radius: 12px;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+    display: none; /* default hidden, open toggles display via .open */
+    z-index: 110; /* above header */
+    min-width: 180px;
+  }
+
+  /* When open, show as flexible column */
+  :root[data-theme="light"] .main-nav.open {
+    display: flex;
+  }
+
+  /* Links inside mobile panel */
+  :root[data-theme="light"] .main-nav a {
+    color: var(--text-muted);
+    padding: 0.55rem 0.8rem;
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+
+  :root[data-theme="light"] .main-nav a:hover {
+    background: rgba(0,0,0,0.03);
+    color: var(--text);
+  }
+
+  /* Make the little toggle button visible and matching */
+  :root[data-theme="light"] .nav-toggle {
+    display: inline-flex;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-subtle);
+    color: var(--text);
+    padding: 0.35rem 0.7rem;
+  }
+
+  /* If your header has blur/shadow, make sure nav doesn't inherit heavy dark blur */
+  :root[data-theme="light"] .site-header {
+    backdrop-filter: none;
+    background: var(--bg-elevated);
+  }
+}
