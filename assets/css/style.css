@@ -18,20 +18,107 @@
    Light theme
    ----------------------------- */
 :root[data-theme="light"] {
-  --bg: #ffffff;
-  --bg-elevated: #fbfbfd;
-  --bg-muted: #f3f4f6;
-  --surface: #ffffff;
+/* Make plain text / headings / paragraphs use theme color */
+:root[data-theme="light"] body,
+:root[data-theme="light"] p,
+:root[data-theme="light"] li,
+:root[data-theme="light"] span,
+:root[data-theme="light"] a,
+:root[data-theme="light"] h1,
+:root[data-theme="light"] h2,
+:root[data-theme="light"] h3,
+:root[data-theme="light"] h4,
+:root[data-theme="light"] h5,
+:root[data-theme="light"] h6 {
+  color: var(--text) !important;
+}
 
-  --border-subtle: #e6e7eb;
-  --shadow-soft: 0 10px 30px rgba(16, 24, 40, 0.06);
+/* Muted text */
+:root[data-theme="light"] .muted,
+:root[data-theme="light"] .small-note,
+:root[data-theme="light"] .section-subtitle,
+:root[data-theme="light"] .hero-subtitle,
+:root[data-theme="light"] .info-list li span:first-child {
+  color: var(--text-muted) !important;
+}
 
-  --text: #0f1724;
-  --text-muted: #6b7280;
+/* Ensure links are visible */
+:root[data-theme="light"] a {
+  color: var(--primary);
+  text-decoration: none;
+}
+:root[data-theme="light"] a:hover {
+  text-decoration: underline;
+}
 
-  --primary: #2563eb;
-  --primary-soft: rgba(37, 99, 235, 0.12);
-  --secondary: #f97316;
+/* Header / navbar: make it crisp and readable in light mode */
+:root[data-theme="light"] .site-header {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: none;           /* remove dark blur effect */
+  box-shadow: 0 6px 18px rgba(16,24,40,0.03);
+}
+
+/* Logo and nav links */
+:root[data-theme="light"] .logo-main,
+:root[data-theme="light"] .logo-sub,
+:root[data-theme="light"] .main-nav a,
+:root[data-theme="light"] .nav-toggle {
+  color: var(--text) !important;
+}
+
+/* Make nav links slightly muted until hover */
+:root[data-theme="light"] .main-nav a {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+:root[data-theme="light"] .main-nav a:hover {
+  color: var(--text);
+}
+
+/* Navbar toggle button style */
+:root[data-theme="light"] .nav-toggle {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Cards and hero side panels */
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .hero-card,
+:root[data-theme="light"] .info-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+}
+
+/* Footer styling in light mode — make it consistent */
+:root[data-theme="light"] .site-footer {
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
+/* Footer inner text */
+:root[data-theme="light"] .site-footer p,
+:root[data-theme="light"] .site-footer .footer-note {
+  color: var(--text-muted);
+}
+
+/* Badges / labels */
+:root[data-theme="light"] .badge {
+  border-color: var(--border-subtle);
+  color: var(--text-muted);
+  background: transparent;
+}
+
+/* Small final safety: replace any remaining pure-black rules */
+:root[data-theme="light"] .force-black,
+:root[data-theme="light"] [style*="color:#000"],
+:root[data-theme="light"] [style*="color: #000"] {
+  color: var(--text) !important;
+}
 }
 
 
