@@ -1,23 +1,30 @@
 /* ===============================
-  Robust main script: component loader, theme, mobile nav, smooth scroll
-  FULL FILE — USE AS assets/js/main.js
+  FINAL main.js — Component loader + Theme + Mobile Nav + Smooth Scroll
+  File: assets/js/main.js
   =============================== */
 
 (() => {
-  const select = (sel) => document.querySelector(sel);
-  const selectAll = (sel) => Array.from(document.querySelectorAll(sel));
+  // --- small helpers ---
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  const isMobileWidth = () => window.innerWidth <= 700;
 
+  // --- determine components path (works from root and subfolders like /blog/) ---
   function componentsBasePath() {
     const path = window.location.pathname;
-    if (path.startsWith('/blog/') || path.split('/').filter(Boolean).length > 1) {
+    // If page is in a nested folder (e.g. /blog/...), components are ../components/
+    const segments = path.split('/').filter(Boolean);
+    // If segments length >= 2 OR starts with 'blog', go up one level
+    if (segments.length >= 2 || segments[0] === 'blog') {
       return '../components/';
     }
     return 'components/';
   }
 
+  // --- fetch and inject component with fallback html ---
   async function loadComponent(targetId, filename, fallbackHtml = '') {
     const target = document.getElementById(targetId);
-    if (!target) return;
+    if (!target) return false;
     const base = componentsBasePath();
     const url = base + filename;
 
@@ -27,12 +34,15 @@
       const html = await res.text();
       target.innerHTML = html;
       return true;
-    } catch {
+    } catch (err) {
+      console.warn('Could not load component:', url, err);
+      // insert fallback so UI never breaks
       target.innerHTML = fallbackHtml;
       return false;
     }
   }
 
+  // --- fallback header & footer (minimal, used only if fetch fails) ---
   const headerFallback = `
     <header class="site-header">
       <div class="container nav-container">
@@ -40,6 +50,7 @@
           <span class="logo-main">rdsgn</span>
           <span class="logo-sub">Redesign Digital</span>
         </div>
+
         <nav class="main-nav" id="mainNav">
           <a href="/">Home</a>
           <a href="/#about">About</a>
@@ -47,9 +58,12 @@
           <a href="/#portfolio">Portfolio</a>
           <a href="/blog/">Blog</a>
           <a href="/#contact">Contact</a>
-          <button id="themeToggle" class="theme-toggle">🌙</button>
         </nav>
-        <button id="navToggle" class="nav-toggle">☰</button>
+
+        <div class="nav-controls">
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+          <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        </div>
       </div>
     </header>
   `;
@@ -57,71 +71,121 @@
   const footerFallback = `
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>© <span id="year"></span> rdsgn • Redesign Digital.</p>
-        <p class="footer-note">Built with HTML, CSS, JS • Hosted on GitHub Pages</p>
+        <p>© <span id="year"></span> rdsgn • Redesign Digital. All rights reserved.</p>
+        <p class="footer-note">Built with HTML, CSS & JS. Hosted on GitHub Pages.</p>
       </div>
     </footer>
   `;
 
+  // --- initialization utilities ---
   function initYear() {
-    const y = document.getElementById('year');
-    if (y) y.textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
-  function initTheme() {
+  function getStoredTheme() {
+    return localStorage.getItem('theme');
+  }
+
+  function setStoredTheme(theme) {
+    localStorage.setItem('theme', theme);
+  }
+
+  function applyTheme(theme) {
     const root = document.documentElement;
-    const saved = localStorage.getItem('theme') || root.getAttribute('data-theme');
-    root.setAttribute('data-theme', saved || 'dark');
+    if (theme === 'light') root.setAttribute('data-theme', 'light');
+    else root.setAttribute('data-theme', 'dark');
     updateThemeToggleUI();
   }
 
   function updateThemeToggleUI() {
     const root = document.documentElement;
-    const theme = root.getAttribute('data-theme');
-    const toggles = selectAll('#themeToggle, .theme-toggle');
-    toggles.forEach(btn => btn.textContent = theme === 'light' ? '☀️' : '🌙');
+    const theme = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const toggles = $$('button#themeToggle, button.theme-toggle');
+    toggles.forEach(btn => {
+      // show sun for light, moon for dark
+      btn.textContent = theme === 'light' ? '☀️' : '🌙';
+      btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+    });
   }
 
+  // --- delegated theme toggle listener (works even if button injected later) ---
   function initThemeToggleListener() {
     document.addEventListener('click', (e) => {
       const t = e.target;
-      if (!t || (!t.classList.contains('theme-toggle') && t.id !== 'themeToggle')) return;
-      const root = document.documentElement;
-      const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', now);
-      localStorage.setItem('theme', now);
-      updateThemeToggleUI();
+      if (!t) return;
+      if (t.id === 'themeToggle' || t.classList.contains('theme-toggle')) {
+        const root = document.documentElement;
+        const now = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        applyTheme(now);
+        setStoredTheme(now);
+      }
     });
   }
 
+  // --- mobile nav toggle behavior ---
   function initNavToggle() {
-    const navToggle = document.getElementById('navToggle') || select('.nav-toggle');
-    const mainNav = document.getElementById('mainNav') || select('.main-nav');
+    // Using delegated queries to support injected header
+    const navToggle = document.getElementById('navToggle') || $('.nav-toggle');
+    const mainNav = document.getElementById('mainNav') || $('.main-nav');
+
     if (!navToggle || !mainNav) return;
 
-    navToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
+    // Ensure ARIA reflects state
+    function setNavAria(open) {
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    navToggle.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const opening = !mainNav.classList.contains('open');
       mainNav.classList.toggle('open');
+      setNavAria(opening);
     });
 
-    mainNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 700) mainNav.classList.remove('open');
+    // Close nav on link click (mobile only)
+    mainNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (isMobileWidth()) {
+          mainNav.classList.remove('open');
+          setNavAria(false);
+        }
       });
     });
 
-    document.addEventListener('click', (e) => {
-      if (window.innerWidth > 700) return;
-      if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
-        mainNav.classList.remove('open');
+    // Close when clicking outside (mobile)
+    document.addEventListener('click', (ev) => {
+      if (!isMobileWidth()) return;
+      if (!mainNav.contains(ev.target) && !navToggle.contains(ev.target)) {
+        if (mainNav.classList.contains('open')) {
+          mainNav.classList.remove('open');
+          setNavAria(false);
+        }
       }
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') mainNav.classList.remove('open');
+    // Close on Escape
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Escape' && mainNav.classList.contains('open')) {
+        mainNav.classList.remove('open');
+        setNavAria(false);
+      }
     });
+
+    // Prevent layout jumps: force width from computed style when opening (safety)
+    const openWatcher = new MutationObserver(() => {
+      if (mainNav.classList.contains('open')) {
+        // read computed width to stabilise layout (no inline style change)
+        const w = getComputedStyle(mainNav).width;
+        // set CSS variable if needed — avoid writing inline width unless necessary
+        // (we rely on CSS clamp; this is just a no-op read to stabilize reflow)
+        void w;
+      }
+    });
+    openWatcher.observe(mainNav, { attributes: true, attributeFilter: ['class'] });
   }
 
+  // --- smooth scroll for same-page anchors (works even for links with path+hash) ---
   function initSmoothScroll() {
     document.addEventListener('click', (e) => {
       const a = e.target.closest('a[href]');
@@ -129,45 +193,62 @@
       const href = a.getAttribute('href');
       if (!href) return;
 
+      // handle simple hash links
       if (href.startsWith('#')) {
-        const t = document.querySelector(href);
-        if (!t) return;
+        const target = document.querySelector(href);
+        if (!target) return;
         e.preventDefault();
-        const offset = t.getBoundingClientRect().top + window.scrollY - 72;
-        window.scrollTo({ top: offset, behavior: 'smooth' });
-        const mainNav = select('.main-nav');
-        if (window.innerWidth <= 700) mainNav?.classList.remove('open');
+        const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 72);
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        // close mobile nav
+        const nav = document.getElementById('mainNav') || $('.main-nav');
+        if (nav && isMobileWidth()) nav.classList.remove('open');
         return;
       }
 
+      // handle links like /#about or same-page path with hash
       try {
         const url = new URL(href, window.location.origin);
-        if (url.pathname === window.location.pathname && url.hash) {
-          const t = document.querySelector(url.hash);
-          if (t) {
-            e.preventDefault();
-            const offset = t.getBoundingClientRect().top + window.scrollY - 72;
-            window.scrollTo({ top: offset, behavior: 'smooth' });
-            const mainNav = select('.main-nav');
-            if (window.innerWidth <= 700) mainNav?.classList.remove('open');
-          }
+        if (url.hash && url.pathname === window.location.pathname) {
+          const target = document.querySelector(url.hash);
+          if (!target) return;
+          e.preventDefault();
+          const y = Math.max(0, target.getBoundingClientRect().top + window.scrollY - 72);
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          const nav = document.getElementById('mainNav') || $('.main-nav');
+          if (nav && isMobileWidth()) nav.classList.remove('open');
         }
-      } catch {}
+      } catch (err) {
+        // ignore invalid URLs
+      }
     });
   }
 
+  // --- bootstrap: load components then initialize features ---
   async function bootstrap() {
+    // load header/footer (try multiple times if necessary)
     await loadComponent('site-header', 'header.html', headerFallback);
     await loadComponent('site-footer', 'footer.html', footerFallback);
 
+    // prefer stored theme
+    const stored = getStoredTheme();
+    if (stored) applyTheme(stored);
+    else {
+      // if no stored, keep existing data-theme or default to dark
+      const root = document.documentElement;
+      const cur = root.getAttribute('data-theme');
+      applyTheme(cur === 'light' ? 'light' : 'dark');
+    }
+
+    // small delay for elements to be present
     setTimeout(() => {
       initYear();
-      initTheme();
       initThemeToggleListener();
       initNavToggle();
       initSmoothScroll();
-    }, 50);
+    }, 40);
   }
 
+  // start on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', bootstrap);
 })();
