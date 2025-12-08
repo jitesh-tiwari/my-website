@@ -728,3 +728,42 @@ img {
     background: var(--bg-elevated);
   }
 }
+/* =========================
+   Mobile nav size fix (light theme)
+   Keeps the mobile nav panel width stable when opened
+   Paste after other light-mode mobile nav rules
+   ========================= */
+
+@media (max-width: 700px) {
+  /* fixed width for the mobile nav panel and smooth layout */
+  :root[data-theme="light"] .main-nav {
+    min-width: 200px;        /* minimum width */
+    max-width: 260px;        /* maximum width to prevent growing too large */
+    width: auto;             /* allow content-based width within min/max */
+    box-sizing: border-box;
+    padding: 0.6rem 0.9rem;
+    transition: none;        /* disable size-changing transitions */
+    transform-origin: top right;
+  }
+
+  /* When nav opens, force the same width and avoid auto-resize */
+  :root[data-theme="light"] .main-nav.open {
+    display: flex;
+    width: clamp(200px, 45vw, 260px); /* responsive but bounded */
+    min-width: 200px;
+    max-width: 260px;
+  }
+
+  /* Prevent inner links from forcing extra width */
+  :root[data-theme="light"] .main-nav a {
+    white-space: nowrap;     /* don't wrap text to multiple lines */
+    overflow: hidden;
+    text-overflow: ellipsis; /* truncate long text */
+    padding: 0.5rem 0.75rem;
+    display: block;
+  }
+
+  /* If you prefer full-width mobile menu, replace the above .open rule
+     with: width: calc(100% - 32px); left: 16px; right: 16px; (but we keep boxed style now) */
+}
+
