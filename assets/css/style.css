@@ -1,5 +1,6 @@
-/* ===================== THEME VARIABLES ===================== */
-/* Dark theme = default */
+/* =========================================
+   THEME VARIABLES — DARK THEME (default)
+      ========================================= */
 :root {
   --primary: #2563eb;
   --primary-soft: rgba(37, 99, 235, 0.12);
@@ -19,9 +20,9 @@
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
 }
 
-/* -----------------------------
-   Light theme variables (only variables)
-   ----------------------------- */
+/* =========================================
+                                   LIGHT THEME VARIABLES
+                                      ========================================= */
 :root[data-theme="light"] {
   --bg: #ffffff;
   --bg-elevated: #fbfbfd;
@@ -39,172 +40,59 @@
   --secondary: #f97316;
 }
 
-/* =========================
-   Light-mode overrides (rules)
-   These must be outside :root blocks
-   ========================= */
-
-/* Ensure base text follows theme variables in light mode */
+/* =========================================
+                                                               LIGHT THEME OVERRIDES
+                                                                  ========================================= */
 :root[data-theme="light"] body,
-:root[data-theme="light"] p,
-:root[data-theme="light"] li,
-:root[data-theme="light"] span,
-:root[data-theme="light"] a,
 :root[data-theme="light"] h1,
 :root[data-theme="light"] h2,
 :root[data-theme="light"] h3,
 :root[data-theme="light"] h4,
 :root[data-theme="light"] h5,
-:root[data-theme="light"] h6 {
+:root[data-theme="light"] h6,
+:root[data-theme="light"] p,
+:root[data-theme="light"] li,
+:root[data-theme="light"] span,
+:root[data-theme="light"] a {
   color: var(--text) !important;
 }
 
-/* Muted text */
 :root[data-theme="light"] .muted,
-:root[data-theme="light"] .small-note,
-:root[data-theme="light"] .section-subtitle,
 :root[data-theme="light"] .hero-subtitle,
+:root[data-theme="light"] .section-subtitle,
 :root[data-theme="light"] .info-list li span:first-child {
   color: var(--text-muted) !important;
 }
 
-/* Links in light mode */
-:root[data-theme="light"] a {
-  color: var(--primary);
-  text-decoration: none;
-}
-:root[data-theme="light"] a:hover {
-  text-decoration: underline;
+:root[data-theme="light"] body {
+  background: var(--bg) !important;
 }
 
-/* Header / navbar: readable in light mode */
+/* Header light mode */
 :root[data-theme="light"] .site-header {
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border-subtle);
   backdrop-filter: none;
-  box-shadow: 0 6px 18px rgba(16,24,40,0.03);
 }
 
-/* Logo and nav links */
-:root[data-theme="light"] .logo-main,
-:root[data-theme="light"] .logo-sub,
-:root[data-theme="light"] .main-nav a,
-:root[data-theme="light"] .nav-toggle {
-  color: var(--text) !important;
-}
-
-/* Muted nav links until hover */
-:root[data-theme="light"] .main-nav a {
-  color: var(--text-muted);
-  font-weight: 600;
-}
-:root[data-theme="light"] .main-nav a:hover {
-  color: var(--text);
-}
-
-/* Nav toggle button style in light mode */
-:root[data-theme="light"] .nav-toggle {
-  background: rgba(0,0,0,0.03);
-  border: 1px solid var(--border-subtle);
-  color: var(--text);
-}
-
-/* Cards and panels in light mode */
+/* Cards in light */
 :root[data-theme="light"] .card,
 :root[data-theme="light"] .hero-card,
 :root[data-theme="light"] .info-card {
   background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-subtle) !important;
   box-shadow: var(--shadow-soft);
-  color: var(--text);
 }
 
-/* Footer in light mode */
+/* Footer light */
 :root[data-theme="light"] .site-footer {
   background: var(--bg-elevated);
   border-top: 1px solid var(--border-subtle);
-  color: var(--text-muted);
-  box-shadow: none;
-}
-:root[data-theme="light"] .site-footer p,
-:root[data-theme="light"] .site-footer .footer-note {
-  color: var(--text-muted);
 }
 
-/* Badges */
-:root[data-theme="light"] .badge {
-  border-color: var(--border-subtle);
-  color: var(--text-muted);
-  background: transparent;
-}
-
-/* Safety replacement for inline black color */
-:root[data-theme="light"] .force-black,
-:root[data-theme="light"] [style*="color:#000"],
-:root[data-theme="light"] [style*="color: #000"] {
-  color: var(--text) !important;
-}
-
-/* Light mode base background override (prevents dark radial gradient) */
-:root[data-theme="light"] body {
-  background: var(--bg);
-}
-
-/* =========================
-   Fix: Service & Blog sections in light mode
-   ========================= */
-
-:root[data-theme="light"] .section-muted {
-  background: var(--bg-muted) !important;
-  color: var(--text) !important;
-}
-
-:root[data-theme="light"] .section-muted .container {
-  color: var(--text);
-}
-
-:root[data-theme="light"] .section-muted .card,
-:root[data-theme="light"] .section-muted .service-card,
-:root[data-theme="light"] .section-muted .blog-card,
-:root[data-theme="light"] .section-muted .portfolio-card {
-  background: var(--surface) !important;
-  border: 1px solid var(--border-subtle) !important;
-  box-shadow: var(--shadow-soft);
-  color: var(--text);
-}
-
-:root[data-theme="light"] .section-muted .section-title,
-:root[data-theme="light"] .section-muted h1,
-:root[data-theme="light"] .section-muted h2,
-:root[data-theme="light"] .section-muted h3 {
-  color: var(--text) !important;
-}
-
-:root[data-theme="light"] .section-muted p,
-:root[data-theme="light"] .section-muted .section-subtitle,
-:root[data-theme="light"] .section-muted .hero-subtitle,
-:root[data-theme="light"] .section-muted .badge,
-:root[data-theme="light"] .section-muted .text-link {
-  color: var(--text-muted) !important;
-}
-
-:root[data-theme="light"] .section-muted .primary-btn,
-:root[data-theme="light"] .section-muted .small-btn,
-:root[data-theme="light"] .section-muted .ghost-btn {
-  color: inherit;
-}
-
-:root[data-theme="light"] .section-muted .hero-card,
-:root[data-theme="light"] .section-muted .card .hero-card {
-  background: var(--surface) !important;
-}
-
-:root[data-theme="light"] .cards-grid {
-  gap: 1.6rem;
-}
-
-/* ===================== GLOBAL UTILS ===================== */
-
+/* =========================================
+                                                                                           GLOBAL RESET
+                                                                                              ========================================= */
 *,
 *::before,
 *::after {
@@ -215,17 +103,21 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Segoe UI", sans-serif;
+  font-family: system-ui, sans-serif;
   background: radial-gradient(circle at top left, #1e293b, var(--bg));
   color: var(--text);
   scroll-behavior: smooth;
-}
-
-body {
   min-height: 100vh;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================
+                                                                                                                 LAYOUT HELPERS
+                                                                                                                    ========================================= */
 .container {
   width: 100%;
   max-width: 1120px;
@@ -241,35 +133,30 @@ body {
   background: radial-gradient(circle at top, #111827, #020617);
 }
 
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+:root[data-theme="light"] .section-muted {
+  background: var(--bg-muted) !important;
 }
 
-.section-subtitle {
-  color: var(--text-muted);
-  max-width: 640px;
-}
-
-/* ===================== HEADER ===================== */
-
+/* =========================================
+                                                                                                                                     HEADER (STICKY)
+                                                                                                                                        ========================================= */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(18px);
-  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), transparent);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
-  transition: background 180ms ease, border-color 180ms ease;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  background: rgba(15, 23, 42, 0.95);
+  overflow: visible;
 }
 
 .nav-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0.75rem 1.25rem;
 }
 
+/* LOGO */
 .logo-main {
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -278,523 +165,135 @@ body {
 }
 
 .logo-sub {
-  display: block;
   font-size: 0.7rem;
   color: var(--text-muted);
 }
 
+/* NAVIGATION */
 .main-nav {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
 
-.main-nav a {
-  text-decoration: none;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  position: relative;
+/* THEME + HAMBURGER AREA */
+.nav-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.main-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.3rem;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(to right, var(--primary), var(--secondary));
-  transition: width 0.2s ease-out;
-}
-
-.main-nav a:hover {
+.theme-toggle {
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text);
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.main-nav a:hover::after {
-  width: 100%;
+:root[data-theme="light"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.04);
 }
 
-/* Mobile nav toggle (desktop default hidden) */
+/* Hamburger button */
 .nav-toggle {
   display: none;
-  border: none;
-  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-subtle);
+  background: rgba(15, 23, 42, 0.8);
   color: var(--text);
   font-size: 1.3rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-}
-
-/* ===================== HERO ===================== */
-
-.hero {
-  padding: 4.5rem 0 4rem;
-}
-
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
-  gap: 2.5rem;
-  align-items: center;
-}
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  margin-bottom: 0.4rem;
-}
-
-.hero h1 {
-  font-size: clamp(2.1rem, 3vw, 2.8rem);
-  line-height: 1.1;
-  margin-bottom: 0.75rem;
-}
-
-.accent {
-  background: linear-gradient(to right, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.hero-subtitle {
-  color: var(--text-muted);
-  max-width: 620px;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin: 1.5rem 0 1rem;
-}
-
-.hero-note {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  max-width: 560px;
-}
-
-/* Hero side card */
-.hero-card {
-  background: radial-gradient(circle at top, #1e293b, #020617);
-  border-radius: var(--radius-xl);
-  padding: 1.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  box-shadow: var(--shadow-soft);
-}
-
-.hero-card h2 {
-  margin-top: 0;
-  font-size: 1.2rem;
-  margin-bottom: 0.9rem;
-}
-
-.hero-card ul {
-  padding-left: 1.1rem;
-  margin: 0;
-  color: var(--text-muted);
-}
-
-/* ===================== BUTTONS ===================== */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 0.6rem 1.4rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  border: 1px solid transparent;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
-  background 0.12s ease-out, border-color 0.12s ease-out;
-  white-space: nowrap;
 }
 
-.btn:active {
-  transform: scale(0.97);
-}
-
-.primary-btn {
-  background: linear-gradient(to right, var(--primary), var(--secondary));
-  color: #f9fafb;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
-}
-
-.primary-btn:hover {
-  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.6);
-}
-
-/* Ghost / secondary buttons adapt to theme */
-.ghost-btn {
-  background: rgba(15, 23, 42, 0.3);
-  border-color: rgba(148, 163, 184, 0.4);
-  color: var(--text);
-}
-:root[data-theme="light"] .ghost-btn {
-  background: rgba(0,0,0,0.04);
-  border-color: var(--border-subtle);
+:root[data-theme="light"] .nav-toggle {
+  background: rgba(0, 0, 0, 0.03);
   color: var(--text);
 }
 
-.secondary-btn {
-  background: rgba(15, 23, 42, 0.9);
-  border-color: rgba(148, 163, 184, 0.4);
-  color: var(--text);
-}
-:root[data-theme="light"] .secondary-btn {
-  background: rgba(0,0,0,0.04);
-  border-color: var(--border-subtle);
-  color: var(--text);
-}
-
-.small-btn {
-  padding: 0.45rem 1.1rem;
-  font-size: 0.85rem;
-}
-
-.full-width {
-  width: 100%;
-}
-
-/* ===================== LAYOUTS ===================== */
-
-.two-col {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
-  gap: 2.2rem;
-  align-items: flex-start;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.6rem;
-  margin-top: 2rem;
-}
-
-/* ===================== CARDS ===================== */
-
-.card {
-  background: radial-gradient(circle at top, #020617, #020617);
-  border-radius: var(--radius-lg);
-  padding: 1.4rem 1.35rem;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.7);
-}
-
-.info-card h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-.info-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0 0 1.1rem;
-  font-size: 0.9rem;
-}
-
-.info-list li {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px dashed rgba(148, 163, 184, 0.25);
-  padding: 0.3rem 0;
-}
-
-.info-list li span:first-child {
-  color: var(--text-muted);
-}
-
-.skills-list {
-  padding-left: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-/* Service / portfolio / blog cards */
-
-.service-card h3,
-.portfolio-card h3,
-.blog-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.4rem;
-}
-
-.service-card p,
-.portfolio-card p,
-.blog-card p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.bullet-list {
-  padding-left: 1.1rem;
-  margin: 0.6rem 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-.price-tag {
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: var(--secondary);
-}
-
-.text-link {
-  font-size: 0.85rem;
-  text-decoration: none;
-}
-
-.text-link.disabled {
-  color: var(--text-muted);
-  cursor: default;
-}
-
-.badge {
-  display: inline-block;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.5);
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-}
-
-/* ===================== FOOTER ===================== */
-
-.site-footer {
-  border-top: 1px solid rgba(148, 163, 184, 0.25);
-  padding: 1.5rem 0 2rem;
-  background: radial-gradient(circle at bottom, #020617, #020617);
-}
-
-.footer-inner {
-  text-align: center;
-}
-
-.footer-note {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  max-width: 520px;
-  margin: 0.4rem auto 0;
-}
-
-.small-note {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-/* ===================== RESPONSIVE ===================== */
-
-@media (max-width: 900px) {
-  .hero-inner,
-  .two-col {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Consolidated mobile nav rules (single block) */
+/* =========================================
+                                                                                                                                                                                                                         MOBILE NAV (FINAL — SAME WIDTH BOTH THEMES)
+                                                                                                                                                                                                                            ========================================= */
 @media (max-width: 700px) {
   .nav-toggle {
     display: inline-flex;
   }
 
-  /* Default mobile nav (hidden) */
   .main-nav {
-    position: absolute;
+    position: absolute !important;
     right: 1.25rem;
-    top: 3.1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    background: radial-gradient(circle at top, #020617, #020617);
-    border-radius: 16px;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
-    display: none;
-  }
-
-  /* Open state for dark theme */
-  .main-nav.open {
-    display: flex;
-  }
-
-  .main-nav a {
-    color: var(--text-muted);
-    padding: 0.6rem 0.9rem;
-    width: 100%;
-    display: block;
-    border-radius: 8px;
-  }
-
-  .main-nav a:hover {
-    background: rgba(255,255,255,0.02);
-    color: var(--text);
-  }
-
-  .hero {
-    padding-top: 3.5rem;
-  }
-
-  .cards-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* ===================== SMALL HELPERS ===================== */
-
-/* Make images responsive */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Disabled link look */
-.text-link.disabled {
-  pointer-events: none;
-  opacity: 0.85;
-}
-
-/* =========================
-   Mobile navbar: light-mode fixes (single consolidated block)
-   Put these near end so they override defaults
-   ========================= */
-@media (max-width: 700px) {
-  :root[data-theme="light"] .main-nav {
-    position: absolute;
-    right: 1.25rem;
-    top: 3.1rem;
+    top: 3.2rem;
     flex-direction: column;
     align-items: flex-start;
     background: var(--bg-elevated) !important;
     border-radius: 12px;
     padding: 0.6rem 0.9rem;
     border: 1px solid var(--border-subtle);
-    box-shadow: 0 10px 30px rgba(16,24,40,0.06);
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.10);
     display: none;
     z-index: 110;
     min-width: 200px;
     max-width: 260px;
     width: clamp(200px, 45vw, 260px);
-    box-sizing: border-box;
-    transition: none;
-    transform: none;
+    transition: none !important;
   }
 
-  :root[data-theme="light"] .main-nav.open {
+  .main-nav.open {
     display: flex;
-    width: clamp(200px, 45vw, 260px);
-    min-width: 200px;
-    max-width: 260px;
   }
 
-  :root[data-theme="light"] .main-nav a {
-    color: var(--text-muted);
-    padding: 0.5rem 0.75rem;
+  .main-nav a {
     width: 100%;
-    display: block;
-    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    color: var(--text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    border-radius: 8px;
   }
 
-  :root[data-theme="light"] .main-nav a:hover {
-    background: rgba(0,0,0,0.03);
-    color: var(--text);
-  }
-
-  :root[data-theme="light"] .nav-toggle {
-    display: inline-flex;
-    background: rgba(0,0,0,0.03);
-    border: 1px solid var(--border-subtle);
-    color: var(--text);
-    padding: 0.35rem 0.7rem;
-  }
-
-  :root[data-theme="light"] .site-header {
-    backdrop-filter: none;
-    background: var(--bg-elevated);
-    overflow: visible;
+  .main-nav a:hover {
+    background: rgba(0, 0, 0, 0.04);
   }
 }
 
-/* =========================
-   Final high-specificity overrides (safety net)
-   Place at very end
-   ========================= */
+/* =========================================
+                                                                                                                                                                                                                                                                                                                                                     HERO, CARD, FOOTER (unchanged except theme vars)
+                                                                                                                                                                                                                                                                                                                                                        ========================================= */
+.hero {
+  padding: 4.5rem 0 4rem;
+}
+
+/* Card */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+  background: var(--bg-elevated);
+}
+
+/* =========================================
+                                                                                                                                                                                                                                                                                                                                                                             RESPONSIVE GRID
+                                                                                                                                                                                                                                                                                                                                                                                ========================================= */
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 700px) {
-  :root[data-theme="light"] body .main-nav,
-  :root[data-theme="light"] .main-nav,
-  body[data-theme="light"] .main-nav {
-    position: absolute !important;
-    right: 1.25rem !important;
-    top: 3.1rem !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    background: var(--bg-elevated) !important;
-    border-radius: 12px !important;
-    padding: 0.6rem 0.9rem !important;
-    border: 1px solid var(--border-subtle) !important;
-    box-shadow: 0 10px 30px rgba(16,24,40,0.06) !important;
-    display: none !important;
-    z-index: 9999 !important;
-    min-width: 200px !important;
-    max-width: 260px !important;
-    width: clamp(200px, 45vw, 260px) !important;
-    box-sizing: border-box !important;
-    transition: none !important;
-    transform: none !important;
-  }
-
-  :root[data-theme="light"] .main-nav.open,
-  body[data-theme="light"] .main-nav.open {
-    display: flex !important;
-    width: clamp(200px, 45vw, 260px) !important;
-    min-width: 200px !important;
-    max-width: 260px !important;
-  }
-
-  :root[data-theme="light"] .main-nav,
-  :root[data-theme="light"] .main-nav.open {
-    background-image: none !important;
-    background: var(--bg-elevated) !important;
-  }
-
-  :root[data-theme="light"] .main-nav a {
-    color: var(--text-muted) !important;
-    padding: 0.5rem 0.75rem !important;
-    width: 100% !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-
-  :root[data-theme="light"] .main-nav a:hover {
-    background: rgba(0,0,0,0.03) !important;
-    color: var(--text) !important;
-  }
-
-  :root[data-theme="light"] .site-header {
-    overflow: visible !important;
-    backdrop-filter: none !important;
-    background: var(--bg-elevated) !important;
-  }
-
-  :root[data-theme="light"] .main-nav,
-  :root[data-theme="light"] .main-nav.open {
-    will-change: auto !important;
+  .cards-grid {
+    grid-template-columns: 1fr;
   }
 }
