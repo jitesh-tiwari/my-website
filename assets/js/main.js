@@ -1,83 +1,83 @@
-// Reusable component loader (header, footer, etc.)
-function loadComponent(targetId, path) {
-  const target = document.getElementById(targetId);
-  if (!target) return;
+/* ===============================
+   THEME TOGGLE (Dark / Light)
+   =============================== */
 
-  fetch(path)
-    .then((res) => res.text())
-    .then((html) => {
-      target.innerHTML = html;
-      // after header/footer inserted, re-init features
-      if (path.includes("header.html")) {
-        initNavToggle();
-        initThemeToggle();
-      }
-      if (path.includes("footer.html")) {
-        initYear();
-      }
-    })
-    .catch((err) => {
-      console.error("Error loading component:", path, err);
+const themeToggleBtn = document.querySelector(".theme-toggle");
+const html = document.documentElement;
+
+// Load saved theme if exists
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    html.setAttribute("data-theme", savedTheme);
+}
+
+// Toggle theme function
+function toggleTheme() {
+    const currentTheme = html.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+}
+
+// Theme toggle button click
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", toggleTheme);
+}
+
+
+/* ===============================
+   MOBILE NAVBAR TOGGLE
+   =============================== */
+
+const navToggleBtn = document.querySelector(".nav-toggle");
+const mainNav = document.querySelector(".main-nav");
+
+// Toggle navbar open/close
+if (navToggleBtn && mainNav) {
+    navToggleBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("open");
     });
 }
 
-// Initialize current year in footer
-function initYear() {
-  const yearSpan = document.getElementById("year");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-}
+// Close navbar when clicking outside (mobile only)
+document.addEventListener("click", (e) => {
+    if (window.innerWidth > 700) return; // only mobile
 
-// Mobile nav toggle
-function initNavToggle() {
-  const navToggle = document.getElementById("navToggle");
-  const mainNav = document.getElementById("mainNav");
-
-  if (!navToggle || !mainNav) return;
-
-  navToggle.addEventListener("click", () => {
-    mainNav.classList.toggle("open");
-  });
-
-  mainNav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mainNav.classList.remove("open");
-    });
-  });
-}
-
-// Dark / light mode
-function initThemeToggle() {
-  const toggleBtn = document.getElementById("themeToggle");
-  if (!toggleBtn) return;
-
-  const root = document.documentElement;
-
-  function applyTheme(theme) {
-    if (theme === "light") {
-      root.dataset.theme = "light";
-      toggleBtn.textContent = "🌙";
-    } else {
-      root.dataset.theme = "dark";
-      toggleBtn.textContent = "☀️";
+    if (
+        !mainNav.contains(e.target) && 
+        !navToggleBtn.contains(e.target)
+    ) {
+        mainNav.classList.remove("open");
     }
-  }
+});
 
-  const saved = localStorage.getItem("rdsgn-theme");
-  applyTheme(saved || "dark");
+// Optional: close navbar on ESC key
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        mainNav.classList.remove("open");
+    }
+});
 
-  toggleBtn.addEventListener("click", () => {
-    const current = root.dataset.theme === "light" ? "light" : "dark";
-    const next = current === "light" ? "dark" : "light";
-    applyTheme(next);
-    localStorage.setItem("rdsgn-theme", next);
-  });
-}
 
-// Load header & footer on all pages
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("site-header", "/components/header.html");
-  loadComponent("site-footer", "/components/footer.html");
-  // future: loadComponent("sidebar", "/components/sidebar.html");
+/* ===============================
+   SMOOTH SCROLL FOR NAV LINKS
+   =============================== */
+
+document.querySelectorAll("a[href^='#']").forEach(link => {
+    link.addEventListener("click", function (e) {
+        const target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
+
+        e.preventDefault();
+        window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: "smooth",
+        });
+
+        // Close mobile nav after clicking link
+        if (window.innerWidth < 700) {
+            mainNav.classList.remove("open");
+        }
+    });
 });
