@@ -154,6 +154,74 @@
 :root[data-theme="light"] body {
   background: var(--bg);
 }
+/* =========================
+   Fix: Service & Blog sections in light mode
+   Paste this after your :root[data-theme="light"] rules
+   ========================= */
+
+:root[data-theme="light"] .section-muted {
+  /* replace dark radial gradient with soft light background */
+  background: var(--bg-muted) !important;
+  color: var(--text) !important;
+}
+
+/* Ensure section-muted containers use normal padding/contrast */
+:root[data-theme="light"] .section-muted .container {
+  color: var(--text);
+}
+
+/* Cards inside section-muted (services, blog list, etc.) */
+:root[data-theme="light"] .section-muted .card,
+:root[data-theme="light"] .section-muted .service-card,
+:root[data-theme="light"] .section-muted .blog-card,
+:root[data-theme="light"] .section-muted .portfolio-card {
+  background: var(--surface) !important;      /* white / off-white */
+  border: 1px solid var(--border-subtle) !important;
+  box-shadow: var(--shadow-soft);
+  color: var(--text);
+}
+
+/* Headings and subtitles inside section-muted */
+:root[data-theme="light"] .section-muted .section-title,
+:root[data-theme="light"] .section-muted h1,
+:root[data-theme="light"] .section-muted h2,
+:root[data-theme="light"] .section-muted h3 {
+  color: var(--text) !important;
+}
+
+/* Paragraphs and small text */
+:root[data-theme="light"] .section-muted p,
+:root[data-theme="light"] .section-muted .section-subtitle,
+:root[data-theme="light"] .section-muted .hero-subtitle,
+:root[data-theme="light"] .section-muted .badge,
+:root[data-theme="light"] .section-muted .text-link {
+  color: var(--text-muted) !important;
+}
+
+/* Link/buttons contrast inside muted sections */
+:root[data-theme="light"] .section-muted .primary-btn,
+:root[data-theme="light"] .section-muted .small-btn,
+:root[data-theme="light"] .section-muted .ghost-btn {
+  color: inherit;
+}
+
+/* If any inner element used dark gradient, neutralize it */
+:root[data-theme="light"] .section-muted .hero-card,
+:root[data-theme="light"] .section-muted .card .hero-card {
+  background: var(--surface) !important;
+}
+
+/* Make sure the cards-grid spacing stays visible on light */
+:root[data-theme="light"] .cards-grid {
+  gap: 1.6rem;
+}
+
+/* Safety: any element inside section-muted that is forced black */
+:root[data-theme="light"] .section-muted [style*="color:#000"],
+:root[data-theme="light"] .section-muted [style*="color: #000"] {
+  color: var(--text) !important;
+}
+
 
 /* ===================== GLOBAL UTILS ===================== */
 
