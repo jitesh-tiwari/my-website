@@ -14,6 +14,18 @@
   --radius-xl: 24px;
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
 }
+/* Light theme overrides */
+:root[data-theme="light"] {
+  --bg: #f3f4f6;
+  --bg-elevated: #ffffff;
+  --bg-muted: #e5e7eb;
+  --surface: #ffffff;
+  --border-subtle: #d1d5db;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
+}
+
 
 /* Sirf yaha color change karoge to poora theme change ho jayega */
 
@@ -443,3 +455,19 @@ body {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.theme-toggle {
+  border: none;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+:root[data-theme="light"] .theme-toggle {
+  background: rgba(243, 244, 246, 0.9);
+}
+
