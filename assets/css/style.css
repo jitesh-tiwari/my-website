@@ -110,7 +110,7 @@ a:focus {
   top: 0;
   z-index: 9999;
   backdrop-filter: blur(14px);
-  background: rgba(15, 23, 42, 0.65);
+  background: #e5e7eb;
   overflow: visible;
   border-bottom: 1px solid var(--border-subtle);
 }
